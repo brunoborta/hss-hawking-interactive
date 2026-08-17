@@ -150,3 +150,7 @@ dist
 
 # Local override files
 *.local
+
+# Asset tooling scratch output
+tools/rectify-preview.png
+tools/__pycache__/
