@@ -28,19 +28,22 @@ const input = 'rounded border border-cyan-line/30 bg-black/30 px-2 py-1 text-sm 
 
 export function Inspector({ poi, onChange }: { poi: Poi; onChange: (patch: Patch) => void }) {
   const [advanced, setAdvanced] = useState(false);
-  const [modesText, setModesText] = useState((poi.gameModes ?? []).join(', '));
   const [idText, setIdText] = useState(poi.id);
+  const [variantText, setVariantText] = useState(poi.variant ?? '');
+  const [modesText, setModesText] = useState((poi.gameModes ?? []).join(', '));
 
-  // Reset local text state when the selected POI changes (not on every keystroke),
-  // using the render-phase "adjusting state" pattern instead of an effect.
+  // Reset local text buffers only when the selected POI changes (poi.id) — i.e. a
+  // different POI was selected, or the reducer regenerated the id after a
+  // category/zone change. Never resync from poi.variant/poi.gameModes identity
+  // changes, since those change on every keystroke once the normalised patch is
+  // echoed back through the store (that's the bug this buffering fixes).
+  // Render-phase "adjusting state" pattern, kept lint-clean under
+  // react-hooks/set-state-in-effect (no useEffect involved).
   const [syncedId, setSyncedId] = useState(poi.id);
-  const [syncedGameModes, setSyncedGameModes] = useState(poi.gameModes);
   if (poi.id !== syncedId) {
     setSyncedId(poi.id);
     setIdText(poi.id);
-  }
-  if (poi.id !== syncedId || poi.gameModes !== syncedGameModes) {
-    setSyncedGameModes(poi.gameModes);
+    setVariantText(poi.variant ?? '');
     setModesText((poi.gameModes ?? []).join(', '));
   }
 
@@ -84,10 +87,30 @@ export function Inspector({ poi, onChange }: { poi: Poi; onChange: (patch: Patch
 
       <div className="grid grid-cols-2 gap-2">
         <Field label="X" htmlFor="insp-x">
-          <input id="insp-x" type="number" step="0.1" className={input} value={poi.x} onChange={(e) => onChange({ x: Number(e.target.value) })} />
+          <input
+            id="insp-x"
+            type="number"
+            step="0.1"
+            className={input}
+            value={poi.x}
+            onChange={(e) => {
+              const v = Number(e.target.value);
+              if (Number.isFinite(v)) onChange({ x: v });
+            }}
+          />
         </Field>
         <Field label="Y" htmlFor="insp-y">
-          <input id="insp-y" type="number" step="0.1" className={input} value={poi.y} onChange={(e) => onChange({ y: Number(e.target.value) })} />
+          <input
+            id="insp-y"
+            type="number"
+            step="0.1"
+            className={input}
+            value={poi.y}
+            onChange={(e) => {
+              const v = Number(e.target.value);
+              if (Number.isFinite(v)) onChange({ y: v });
+            }}
+          />
         </Field>
       </div>
 
@@ -100,7 +123,16 @@ export function Inspector({ poi, onChange }: { poi: Poi; onChange: (patch: Patch
       </Field>
 
       <Field label="Variant" htmlFor="insp-variant">
-        <input id="insp-variant" className={input} value={poi.variant ?? ''} onChange={(e) => onChange({ variant: kebab(e.target.value) })} />
+        <input
+          id="insp-variant"
+          className={input}
+          value={variantText}
+          onChange={(e) => {
+            setVariantText(e.target.value);
+            onChange({ variant: kebab(e.target.value) });
+          }}
+          onBlur={() => setVariantText(kebab(variantText))}
+        />
       </Field>
 
       <Field label="Game modes (comma-separated)" htmlFor="insp-modes">
@@ -112,6 +144,10 @@ export function Inspector({ poi, onChange }: { poi: Poi; onChange: (patch: Patch
             setModesText(e.target.value);
             const list = e.target.value.split(',').map(kebab).filter(Boolean);
             onChange({ gameModes: list });
+          }}
+          onBlur={() => {
+            const list = modesText.split(',').map(kebab).filter(Boolean);
+            setModesText(list.join(', '));
           }}
         />
       </Field>
