@@ -31,6 +31,7 @@ export function usePermalink({
 
   const onPopupOpen = (id: string) => {
     if (window.location.hash !== poiHash(id)) window.history.replaceState(null, '', poiHash(id));
+    setOpenPoiId(null);
   };
 
   return { openPoiId, onPopupOpen };

@@ -8,14 +8,23 @@ const BASE_IMAGE = `${import.meta.env.BASE_URL}base.webp`;
 function FitAndLimit() {
   const map = useMap();
   useEffect(() => {
+    let lastW = 0;
+    let lastH = 0;
     const fit = () => {
       map.invalidateSize();
       const fitZoom = map.getBoundsZoom(IMAGE_BOUNDS, false);
       map.setMinZoom(fitZoom);
       map.fitBounds(IMAGE_BOUNDS, { animate: false });
+      const el = map.getContainer();
+      lastW = el.clientWidth;
+      lastH = el.clientHeight;
     };
     fit();
-    const ro = new ResizeObserver(() => fit());
+    const ro = new ResizeObserver(() => {
+      const el = map.getContainer();
+      if (el.clientWidth === lastW && el.clientHeight === lastH) return;
+      fit();
+    });
     ro.observe(map.getContainer());
     return () => ro.disconnect();
   }, [map]);
