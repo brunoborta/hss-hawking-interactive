@@ -1,7 +1,7 @@
 import type { CategoryId } from '../data/categories';
 import type { MapData, Poi } from '../data/schema';
 import type { ZoneId } from '../data/zones';
-import { nextPoiId } from '../lib/ids';
+import { nextPoiId, parsePoiId, POI_ID_PATTERN } from '../lib/ids';
 
 export type Tool = { kind: 'select' } | { kind: 'add'; category: CategoryId };
 
@@ -63,6 +63,13 @@ function stripUndefined(poi: Poi): Poi {
   return Object.fromEntries(Object.entries(poi).filter(([, v]) => v !== undefined)) as Poi;
 }
 
+function isValidExplicitId(id: string, poi: Pick<Poi, 'category' | 'zone'>, otherIds: readonly string[]): boolean {
+  if (!POI_ID_PATTERN.test(id)) return false;
+  const parsed = parsePoiId(id);
+  if (!parsed || parsed.category !== poi.category || parsed.zone !== poi.zone) return false;
+  return !otherIds.includes(id);
+}
+
 export function editorReducer(state: EditorState, action: EditorAction): EditorState {
   switch (action.type) {
     case 'select':
@@ -94,13 +101,15 @@ export function editorReducer(state: EditorState, action: EditorAction): EditorS
       if (idx < 0) return state;
       const current = state.draft.pois[idx]!;
       const patch = cleanPatch(action.patch);
-      let next: Poi = stripUndefined({ ...current, ...patch });
-      const explicitId = typeof action.patch.id === 'string' && action.patch.id.trim() !== '';
+      const patchRest: Partial<Poi> = { ...patch };
+      delete patchRest.id;
+      let next: Poi = { ...stripUndefined({ ...current, ...patchRest } as Poi), id: current.id };
       const keyChanged = next.category !== current.category || next.zone !== current.zone;
-      if (explicitId) {
-        next = { ...next, id: action.patch.id!.trim() };
+      const others = state.draft.pois.filter((p) => p.id !== current.id).map((p) => p.id);
+      const requested = typeof action.patch.id === 'string' ? action.patch.id.trim() : '';
+      if (requested !== '' && isValidExplicitId(requested, next, others)) {
+        next = { ...next, id: requested };
       } else if (keyChanged) {
-        const others = state.draft.pois.filter((p) => p.id !== current.id).map((p) => p.id);
         next = { ...next, id: nextPoiId(others, next.category, next.zone) };
       }
       const pois = state.draft.pois.slice();

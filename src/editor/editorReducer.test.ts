@@ -54,6 +54,30 @@ describe('editorReducer', () => {
     expect(s.draft.pois[0]?.id).toBe('ammo-hub-07');
   });
 
+  it('updatePoi ignores an empty explicit id and keeps the current one', () => {
+    let s = stateWith([p({ id: 'ammo-hub-01', category: 'ammo', zone: 'hub' })]);
+    s = editorReducer(s, { type: 'updatePoi', id: 'ammo-hub-01', patch: { id: '' } });
+    expect(s.draft.pois[0]?.id).toBe('ammo-hub-01');
+    s = editorReducer(s, { type: 'updatePoi', id: 'ammo-hub-01', patch: { id: '   ' } });
+    expect(s.draft.pois[0]?.id).toBe('ammo-hub-01');
+  });
+
+  it('updatePoi rejects an explicit id whose parts do not match category/zone, or that duplicates another poi', () => {
+    let s = stateWith([p({ id: 'ammo-hub-01', category: 'ammo', zone: 'hub' }), p({ id: 'ammo-hub-02', category: 'ammo', zone: 'hub' })]);
+    s = editorReducer(s, { type: 'updatePoi', id: 'ammo-hub-01', patch: { id: 'weapon-hub-01' } });
+    expect(s.draft.pois[0]?.id).toBe('ammo-hub-01');
+    s = editorReducer(s, { type: 'updatePoi', id: 'ammo-hub-01', patch: { id: 'ammo-hub-02' } });
+    expect(s.draft.pois[0]?.id).toBe('ammo-hub-01');
+    s = editorReducer(s, { type: 'updatePoi', id: 'ammo-hub-01', patch: { id: 'bbmachinery' } });
+    expect(s.draft.pois[0]?.id).toBe('ammo-hub-01');
+  });
+
+  it('updatePoi with a valid explicit id AND a zone change uses the explicit id when it matches the new zone', () => {
+    let s = stateWith([p({ id: 'ammo-hub-01', category: 'ammo', zone: 'hub' })]);
+    s = editorReducer(s, { type: 'updatePoi', id: 'ammo-hub-01', patch: { zone: 'machinery', id: 'ammo-machinery-05' } });
+    expect(s.draft.pois[0]).toMatchObject({ id: 'ammo-machinery-05', zone: 'machinery' });
+  });
+
   it('updatePoi strips empty optional strings', () => {
     let s = stateWith([p({ id: 'ammo-hub-01', category: 'ammo', zone: 'hub', name: 'x' })]);
     s = editorReducer(s, { type: 'updatePoi', id: 'ammo-hub-01', patch: { name: '', description: '  ' } });
