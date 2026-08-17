@@ -33,7 +33,7 @@ describe('nextPoiId', () => {
     expect(nextPoiId(ids, 'ammo', 'machinery')).toBe('ammo-machinery-03');
     expect(nextPoiId(ids, 'ammo', 'hub')).toBe('ammo-hub-06');
   });
-  it('fills the first gap (never renumbers, but reuses a freed slot)', () => {
-    expect(nextPoiId(['ammo-hub-01', 'ammo-hub-03'], 'ammo', 'hub')).toBe('ammo-hub-02');
+  it('always uses max+1 — freed numbers are never reused', () => {
+    expect(nextPoiId(['ammo-hub-01', 'ammo-hub-03'], 'ammo', 'hub')).toBe('ammo-hub-04');
   });
 });

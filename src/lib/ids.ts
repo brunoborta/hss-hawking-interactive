@@ -18,27 +18,10 @@ export function parsePoiId(id: string): { category: CategoryId; zone: ZoneId; n:
 }
 
 export function nextPoiId(existingIds: Iterable<string>, category: CategoryId, zone: ZoneId): string {
-  const used = new Set<number>();
-  let maxN = 0;
+  let max = 0;
   for (const id of existingIds) {
     const parsed = parsePoiId(id);
-    if (parsed && parsed.category === category && parsed.zone === zone) {
-      used.add(parsed.n);
-      maxN = Math.max(maxN, parsed.n);
-    }
+    if (parsed && parsed.category === category && parsed.zone === zone) max = Math.max(max, parsed.n);
   }
-
-  // For 0-1 existing IDs, append sequentially without filling gaps
-  if (used.size < 2) {
-    return buildPoiId(category, zone, maxN + 1);
-  }
-
-  // For 2+ IDs, fill the first gap, or append if no gaps
-  for (let n = 1; n <= maxN; n++) {
-    if (!used.has(n)) {
-      return buildPoiId(category, zone, n);
-    }
-  }
-
-  return buildPoiId(category, zone, maxN + 1);
+  return buildPoiId(category, zone, max + 1);
 }
