@@ -454,8 +454,8 @@ describe('nextPoiId', () => {
     expect(nextPoiId(ids, 'ammo', 'machinery')).toBe('ammo-machinery-03');
     expect(nextPoiId(ids, 'ammo', 'hub')).toBe('ammo-hub-06');
   });
-  it('fills the first gap (never renumbers, but reuses a freed slot)', () => {
-    expect(nextPoiId(['ammo-hub-01', 'ammo-hub-03'], 'ammo', 'hub')).toBe('ammo-hub-02');
+  it('always uses max+1 — freed numbers are never reused', () => {
+    expect(nextPoiId(['ammo-hub-01', 'ammo-hub-03'], 'ammo', 'hub')).toBe('ammo-hub-04');
   });
 });
 ```
@@ -566,14 +566,12 @@ export function parsePoiId(id: string): { category: CategoryId; zone: ZoneId; n:
 }
 
 export function nextPoiId(existingIds: Iterable<string>, category: CategoryId, zone: ZoneId): string {
-  const used = new Set<number>();
+  let max = 0;
   for (const id of existingIds) {
     const parsed = parsePoiId(id);
-    if (parsed && parsed.category === category && parsed.zone === zone) used.add(parsed.n);
+    if (parsed && parsed.category === category && parsed.zone === zone) max = Math.max(max, parsed.n);
   }
-  let n = 1;
-  while (used.has(n)) n++;
-  return buildPoiId(category, zone, n);
+  return buildPoiId(category, zone, max + 1);
 }
 ```
 
