@@ -2,18 +2,9 @@ import { useState, type ReactNode } from 'react';
 import { CATEGORIES } from '../data/categories';
 import type { Poi } from '../data/schema';
 import { ZONES } from '../data/zones';
+import { kebab } from '../lib/kebab';
 
 type Patch = Partial<Omit<Poi, 'id'>> & { id?: string };
-
-export function kebab(s: string): string {
-  return s
-    .trim()
-    .toLowerCase()
-    .replace(/[\s_]+/g, '-')
-    .replace(/[^a-z0-9-]/g, '')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '');
-}
 
 function Field({ label, htmlFor, children }: { label: string; htmlFor: string; children: ReactNode }) {
   return (
@@ -94,6 +85,7 @@ export function Inspector({ poi, onChange }: { poi: Poi; onChange: (patch: Patch
             className={input}
             value={poi.x}
             onChange={(e) => {
+              if (e.target.value === '') return;
               const v = Number(e.target.value);
               if (Number.isFinite(v)) onChange({ x: v });
             }}
@@ -107,6 +99,7 @@ export function Inspector({ poi, onChange }: { poi: Poi; onChange: (patch: Patch
             className={input}
             value={poi.y}
             onChange={(e) => {
+              if (e.target.value === '') return;
               const v = Number(e.target.value);
               if (Number.isFinite(v)) onChange({ y: v });
             }}

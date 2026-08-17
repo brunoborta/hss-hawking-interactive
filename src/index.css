@@ -4,7 +4,7 @@
   --color-hull: #0b2a33;
   --color-panel: #061a21;
   --color-cyan-line: #6fd6e8;
-  --font-display: 'Rajdhani', 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Segoe UI', system-ui, sans-serif;
 }
 
 html,
@@ -35,6 +35,10 @@ body,
 .leaflet-touch .leaflet-bar {
   border-color: rgba(111, 214, 232, 0.35);
 }
+.leaflet-bar a.leaflet-disabled,
+.leaflet-touch .leaflet-bar a.leaflet-disabled {
+  opacity: 0.4;
+}
 .leaflet-popup-content-wrapper,
 .leaflet-popup-tip {
   background: rgba(6, 26, 33, 0.95);
@@ -47,10 +51,16 @@ body,
 .poi-marker {
   background: none;
   border: none;
+}
+.poi-marker svg {
+  display: block;
   transition: transform 120ms ease;
+  transform-origin: center;
+}
+.poi-marker:hover svg {
+  transform: scale(1.15);
 }
 .poi-marker:hover {
-  transform: scale(1.15);
   z-index: 1000 !important;
 }
 .poi-marker.is-selected svg {

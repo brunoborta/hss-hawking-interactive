@@ -7,7 +7,7 @@ export function serializeMapData(data: MapData): string {
     const ca = order.get(a.category) ?? 99;
     const cb = order.get(b.category) ?? 99;
     if (ca !== cb) return ca - cb;
-    return a.id.localeCompare(b.id);
+    return a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
   });
   return JSON.stringify({ ...data, pois }, null, 2) + '\n';
 }
@@ -31,5 +31,5 @@ export function downloadJson(filename: string, text: string): void {
   document.body.appendChild(a);
   a.click();
   a.remove();
-  URL.revokeObjectURL(url);
+  setTimeout(() => URL.revokeObjectURL(url), 0);
 }

@@ -1,5 +1,5 @@
 import type { CategoryId } from '../data/categories';
-import type { MapData, Poi } from '../data/schema';
+import { IMAGE_HEIGHT, IMAGE_WIDTH, type MapData, type Poi } from '../data/schema';
 import type { ZoneId } from '../data/zones';
 import { nextPoiId, parsePoiId, POI_ID_PATTERN } from '../lib/ids';
 
@@ -12,6 +12,7 @@ export interface EditorState {
   lastZone: ZoneId;
   past: MapData[];
   future: MapData[];
+  lastEdit: { type: 'updatePoi'; id: string } | null;
 }
 
 type UpdatePatch = Partial<Omit<Poi, 'id'>> & { id?: string };
@@ -37,10 +38,12 @@ export function initialEditorState(published: MapData): EditorState {
     lastZone: 'hub',
     past: [],
     future: [],
+    lastEdit: null,
   };
 }
 
 const round1 = (v: number) => Math.round(v * 10) / 10;
+const clamp = (v: number, max: number) => Math.min(max, Math.max(0, v));
 
 function pushHistory(state: EditorState, draft: MapData): Pick<EditorState, 'draft' | 'past' | 'future'> {
   const past = [...state.past, state.draft].slice(-HISTORY_LIMIT);
@@ -73,10 +76,10 @@ function isValidExplicitId(id: string, poi: Pick<Poi, 'category' | 'zone'>, othe
 export function editorReducer(state: EditorState, action: EditorAction): EditorState {
   switch (action.type) {
     case 'select':
-      return { ...state, selectedId: action.id };
+      return { ...state, selectedId: action.id, lastEdit: null };
 
     case 'setTool':
-      return { ...state, tool: action.tool };
+      return { ...state, tool: action.tool, lastEdit: null };
 
     case 'addPoi': {
       if (state.tool.kind !== 'add') return state;
@@ -85,15 +88,17 @@ export function editorReducer(state: EditorState, action: EditorAction): EditorS
       const id = nextPoiId(state.draft.pois.map((p) => p.id), category, zone);
       const poi: Poi = { id, category, zone, x: round1(action.x), y: round1(action.y) };
       const draft: MapData = { ...state.draft, pois: [...state.draft.pois, poi] };
-      return { ...state, ...pushHistory(state, draft), selectedId: id };
+      return { ...state, ...pushHistory(state, draft), selectedId: id, lastEdit: null };
     }
 
     case 'movePoi': {
       const idx = state.draft.pois.findIndex((p) => p.id === action.id);
       if (idx < 0) return state;
       const pois = state.draft.pois.slice();
-      pois[idx] = { ...pois[idx]!, x: round1(action.x), y: round1(action.y) };
-      return { ...state, ...pushHistory(state, { ...state.draft, pois }) };
+      const x = round1(clamp(action.x, IMAGE_WIDTH));
+      const y = round1(clamp(action.y, IMAGE_HEIGHT));
+      pois[idx] = { ...pois[idx]!, x, y };
+      return { ...state, ...pushHistory(state, { ...state.draft, pois }), lastEdit: null };
     }
 
     case 'updatePoi': {
@@ -103,6 +108,8 @@ export function editorReducer(state: EditorState, action: EditorAction): EditorS
       const patch = cleanPatch(action.patch);
       const patchRest: Partial<Poi> = { ...patch };
       delete patchRest.id;
+      if (typeof patchRest.x === 'number') patchRest.x = round1(clamp(patchRest.x, IMAGE_WIDTH));
+      if (typeof patchRest.y === 'number') patchRest.y = round1(clamp(patchRest.y, IMAGE_HEIGHT));
       let next: Poi = { ...stripUndefined({ ...current, ...patchRest } as Poi), id: current.id };
       const keyChanged = next.category !== current.category || next.zone !== current.zone;
       const others = state.draft.pois.filter((p) => p.id !== current.id).map((p) => p.id);
@@ -112,18 +119,30 @@ export function editorReducer(state: EditorState, action: EditorAction): EditorS
       } else if (keyChanged) {
         next = { ...next, id: nextPoiId(others, next.category, next.zone) };
       }
+
+      if (JSON.stringify(stripUndefined(next)) === JSON.stringify(stripUndefined(current))) {
+        return state;
+      }
+
       const pois = state.draft.pois.slice();
       pois[idx] = next;
       const selectedId = state.selectedId === current.id ? next.id : state.selectedId;
       const lastZone = next.zone !== current.zone ? next.zone : state.lastZone;
-      return { ...state, ...pushHistory(state, { ...state.draft, pois }), selectedId, lastZone };
+      const draft: MapData = { ...state.draft, pois };
+      const lastEdit: EditorState['lastEdit'] = { type: 'updatePoi', id: next.id };
+
+      if (state.lastEdit?.type === 'updatePoi' && state.lastEdit.id === action.id && state.past.length > 0) {
+        return { ...state, draft, future: [], selectedId, lastZone, lastEdit };
+      }
+
+      return { ...state, ...pushHistory(state, draft), selectedId, lastZone, lastEdit };
     }
 
     case 'deletePoi': {
       if (!state.draft.pois.some((p) => p.id === action.id)) return state;
       const pois = state.draft.pois.filter((p) => p.id !== action.id);
       const selectedId = state.selectedId === action.id ? null : state.selectedId;
-      return { ...state, ...pushHistory(state, { ...state.draft, pois }), selectedId };
+      return { ...state, ...pushHistory(state, { ...state.draft, pois }), selectedId, lastEdit: null };
     }
 
     case 'undo': {
@@ -135,6 +154,7 @@ export function editorReducer(state: EditorState, action: EditorAction): EditorS
         past: state.past.slice(0, -1),
         future: [state.draft, ...state.future],
         selectedId: prev.pois.some((p) => p.id === state.selectedId) ? state.selectedId : null,
+        lastEdit: null,
       };
     }
 
@@ -147,10 +167,11 @@ export function editorReducer(state: EditorState, action: EditorAction): EditorS
         past: [...state.past, state.draft],
         future: rest,
         selectedId: next.pois.some((p) => p.id === state.selectedId) ? state.selectedId : null,
+        lastEdit: null,
       };
     }
 
     case 'replaceDraft':
-      return { ...state, ...pushHistory(state, structuredClone(action.data)), selectedId: null };
+      return { ...state, ...pushHistory(state, structuredClone(action.data)), selectedId: null, lastEdit: null };
   }
 }

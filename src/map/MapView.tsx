@@ -2,6 +2,7 @@ import { CRS } from 'leaflet';
 import { useEffect, type ReactNode } from 'react';
 import { ImageOverlay, MapContainer, useMap, useMapEvents } from 'react-leaflet';
 import { fromLatLng, IMAGE_BOUNDS } from '../lib/coords';
+import { IMAGE_HEIGHT, IMAGE_WIDTH } from '../data/schema';
 
 const BASE_IMAGE = `${import.meta.env.BASE_URL}base.webp`;
 
@@ -55,7 +56,7 @@ export function MapView({
       bounds={IMAGE_BOUNDS}
       maxBounds={[
         [-120, -160],
-        [651 + 120, 1395 + 160],
+        [IMAGE_HEIGHT + 120, IMAGE_WIDTH + 160],
       ]}
       maxBoundsViscosity={0.8}
       minZoom={-4}

@@ -118,4 +118,36 @@ describe('editorReducer', () => {
     expect(s.selectedId).toBeNull();
     expect(s.past).toHaveLength(1);
   });
+
+  it('consecutive updatePoi on the same poi coalesce into one undo step', () => {
+    let s = stateWith([p({ id: 'ammo-hub-01', category: 'ammo', zone: 'hub' })]);
+    s = editorReducer(s, { type: 'updatePoi', id: 'ammo-hub-01', patch: { name: 'N' } });
+    s = editorReducer(s, { type: 'updatePoi', id: 'ammo-hub-01', patch: { name: 'Ne' } });
+    s = editorReducer(s, { type: 'updatePoi', id: 'ammo-hub-01', patch: { name: 'Nea' } });
+    expect(s.past).toHaveLength(1);
+    s = editorReducer(s, { type: 'undo' });
+    expect(s.draft.pois[0]).not.toHaveProperty('name');
+  });
+
+  it('a different action breaks the coalescing run', () => {
+    let s = stateWith([p({ id: 'ammo-hub-01', category: 'ammo', zone: 'hub' })]);
+    s = editorReducer(s, { type: 'updatePoi', id: 'ammo-hub-01', patch: { name: 'A' } });
+    s = editorReducer(s, { type: 'select', id: 'ammo-hub-01' });
+    s = editorReducer(s, { type: 'updatePoi', id: 'ammo-hub-01', patch: { name: 'AB' } });
+    expect(s.past).toHaveLength(2);
+  });
+
+  it('updatePoi with no effective change does not touch history', () => {
+    const s0 = stateWith([p({ id: 'ammo-hub-01', category: 'ammo', zone: 'hub' })]);
+    const s1 = editorReducer(s0, { type: 'updatePoi', id: 'ammo-hub-01', patch: { id: '' } });
+    expect(s1).toBe(s0);
+  });
+
+  it('movePoi and updatePoi clamp coordinates to the image', () => {
+    let s = stateWith([p({ id: 'ammo-hub-01', category: 'ammo', zone: 'hub' })]);
+    s = editorReducer(s, { type: 'movePoi', id: 'ammo-hub-01', x: -5, y: 9999 });
+    expect(s.draft.pois[0]).toMatchObject({ x: 0, y: 651 });
+    s = editorReducer(s, { type: 'updatePoi', id: 'ammo-hub-01', patch: { x: 2000 } });
+    expect(s.draft.pois[0]?.x).toBe(1395);
+  });
 });
