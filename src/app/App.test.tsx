@@ -1,10 +1,16 @@
 import { render, screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import type { ReactNode } from 'react';
+import { describe, expect, it, vi } from 'vitest';
+
+vi.mock('../map/MapView', () => ({ MapView: ({ children }: { children?: ReactNode }) => <div data-testid="map">{children}</div> }));
+vi.mock('../map/MarkerLayer', () => ({ MarkerLayer: () => null }));
+
 import { App } from './App';
 
 describe('App', () => {
-  it('renders the title', () => {
+  it('renders map and legend', () => {
     render(<App />);
-    expect(screen.getByRole('heading')).toHaveTextContent('HSS Hawking');
+    expect(screen.getByTestId('map')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /^all$/i })).toBeInTheDocument();
   });
 });
