@@ -144,3 +144,9 @@ vite.config.ts.timestamp-*
 
 # SDD scratch workspace
 .superpowers/
+
+# Build output
+dist
+
+# Local override files
+*.local

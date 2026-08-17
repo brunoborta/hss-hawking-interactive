@@ -1,0 +1,6 @@
+dist
+node_modules
+public
+tools/source
+*.webp
+*.png
