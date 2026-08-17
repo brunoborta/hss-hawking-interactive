@@ -22,9 +22,17 @@ body,
   background: var(--color-hull);
   font-family: inherit;
 }
-.leaflet-control-zoom a {
-  background: rgba(6, 26, 33, 0.85);
+.leaflet-bar a,
+.leaflet-touch .leaflet-bar a {
+  background: rgba(6, 26, 33, 0.9);
   color: var(--color-cyan-line);
+  border-bottom-color: rgba(111, 214, 232, 0.35);
+}
+.leaflet-bar a:hover,
+.leaflet-touch .leaflet-bar a:hover {
+  background: rgba(20, 50, 60, 0.95);
+}
+.leaflet-touch .leaflet-bar {
   border-color: rgba(111, 214, 232, 0.35);
 }
 .leaflet-popup-content-wrapper,

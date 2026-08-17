@@ -13,7 +13,7 @@
 ## Global Constraints
 
 - Static site, no backend, no accounts. Deployed to GitHub Pages at `https://brunoborta.github.io/hss-hawking-interactive/` → Vite `base: '/hss-hawking-interactive/'`.
-- POI coordinates are pixels of the original base image, `1395×651`, origin top-left. Leaflet `[lat, lng] = [y, x]`; conversion only in `src/lib/coords.ts`.
+- POI coordinates are pixels of the original base image, `1395×651`, origin top-left. Leaflet `[lat, lng] = [IMAGE_HEIGHT - y, x]` (CRS.Simple lat grows upward); conversion only in `src/lib/coords.ts`.
 - Category ids (closed list, legend order): `healing`, `ammo`, `capsule`, `info`, `self-destruct`, `black-box`, `pipe-lever`, `weapon`.
 - Zone ids (closed list): `shuttle-bay`, `production`, `laboratory`, `crew-quarters`, `machinery`, `hub`.
 - POI `id` = `<category>-<zone>-<nn>` (two-digit, zero-padded); id parts must equal the POI's `category`/`zone`; ids unique; never renumber existing ids.
@@ -888,7 +888,7 @@ git commit -m "feat(data): add zod schema, published data loader and data guidel
   ```ts
   export type LatLngTuple = [number, number];
   export const IMAGE_BOUNDS: [LatLngTuple, LatLngTuple]; // [[0,0],[IMAGE_HEIGHT, IMAGE_WIDTH]]
-  export function toLatLng(p: { x: number; y: number }): LatLngTuple;   // [y, x]
+  export function toLatLng(p: { x: number; y: number }): LatLngTuple;   // [IMAGE_HEIGHT - y, x]
   export function fromLatLng(ll: { lat: number; lng: number }): { x: number; y: number }; // clamped to image, 1 decimal
   export function displayName(poi: Pick<Poi,'name'|'category'|'zone'>): string; // name ?? "<Category label> — <Zone label>"
   ```
@@ -904,12 +904,19 @@ describe('coords', () => {
   it('bounds cover the whole base image', () => {
     expect(IMAGE_BOUNDS).toEqual([[0, 0], [651, 1395]]);
   });
-  it('toLatLng swaps to [y, x]', () => {
-    expect(toLatLng({ x: 10, y: 20 })).toEqual([20, 10]);
+  it('toLatLng flips y (CRS.Simple lat grows upward) and swaps to [lat, lng]', () => {
+    expect(toLatLng({ x: 10, y: 20 })).toEqual([631, 10]);
+    expect(toLatLng({ x: 0, y: 0 })).toEqual([651, 0]);
+    expect(toLatLng({ x: 1395, y: 651 })).toEqual([0, 1395]);
   });
-  it('fromLatLng swaps back, rounds to 1 decimal and clamps', () => {
-    expect(fromLatLng({ lat: 20.26, lng: 10.04 })).toEqual({ x: 10, y: 20.3 });
-    expect(fromLatLng({ lat: -5, lng: 2000 })).toEqual({ x: 1395, y: 0 });
+  it('fromLatLng flips back, rounds to 1 decimal and clamps', () => {
+    expect(fromLatLng({ lat: 631, lng: 10 })).toEqual({ x: 10, y: 20 });
+    expect(fromLatLng({ lat: 630.74, lng: 10.04 })).toEqual({ x: 10, y: 20.3 });
+    expect(fromLatLng({ lat: -5, lng: 2000 })).toEqual({ x: 1395, y: 651 });
+    expect(fromLatLng({ lat: 700, lng: -3 })).toEqual({ x: 0, y: 0 });
+  });
+  it('round-trips', () => {
+    expect(fromLatLng({ lat: toLatLng({ x: 812.5, y: 333.3 })[0], lng: toLatLng({ x: 812.5, y: 333.3 })[1] })).toEqual({ x: 812.5, y: 333.3 });
   });
 });
 ```
@@ -947,8 +954,9 @@ export const IMAGE_BOUNDS: [LatLngTuple, LatLngTuple] = [
   [IMAGE_HEIGHT, IMAGE_WIDTH],
 ];
 
+// CRS.Simple latitude grows upward, but image y grows downward, so flip y against IMAGE_HEIGHT.
 export function toLatLng(p: { x: number; y: number }): LatLngTuple {
-  return [p.y, p.x];
+  return [IMAGE_HEIGHT - p.y, p.x];
 }
 
 function clamp(v: number, min: number, max: number): number {
@@ -959,7 +967,7 @@ export function fromLatLng(ll: { lat: number; lng: number }): { x: number; y: nu
   const round1 = (v: number) => Math.round(v * 10) / 10;
   return {
     x: round1(clamp(ll.lng, 0, IMAGE_WIDTH)),
-    y: round1(clamp(ll.lat, 0, IMAGE_HEIGHT)),
+    y: round1(clamp(IMAGE_HEIGHT - ll.lat, 0, IMAGE_HEIGHT)),
   };
 }
 ```

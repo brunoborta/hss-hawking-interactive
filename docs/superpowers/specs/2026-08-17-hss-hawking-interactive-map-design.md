@@ -73,7 +73,7 @@ Boundaries:
 
 ### Coordinate system
 
-POI coordinates are **pixels of the original base image (1395×651)**, origin top-left, decimal `x`/`y`. The upscaled base is displayed with `ImageOverlay` bounds `[[0,0],[651,1395]]`, so data is independent of the raster resolution and would survive a later swap to an SVG base. Leaflet's `[lat, lng]` = `[y, x]`; the conversion lives only in `lib/coords.ts`.
+POI coordinates are **pixels of the original base image (1395×651)**, origin top-left, decimal `x`/`y`. The upscaled base is displayed with `ImageOverlay` bounds `[[0,0],[651,1395]]`, so data is independent of the raster resolution and would survive a later swap to an SVG base. Leaflet's `[lat, lng]` = `[IMAGE_HEIGHT - y, x]` (CRS.Simple lat grows upward); the conversion lives only in `lib/coords.ts`.
 
 ## 6. Data model
 
