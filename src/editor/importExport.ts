@@ -1,5 +1,6 @@
 import { CATEGORY_IDS } from '../data/categories';
 import { safeParseMapData, type MapData } from '../data/schema';
+import { migrateDraft } from './draftMigration';
 
 export function serializeMapData(data: MapData): string {
   const order = new Map(CATEGORY_IDS.map((id, i) => [id, i]));
@@ -19,7 +20,7 @@ export function parseImportText(text: string): { ok: true; data: MapData } | { o
   } catch (e) {
     return { ok: false, errors: [`Not valid JSON: ${(e as Error).message}`] };
   }
-  return safeParseMapData(json);
+  return safeParseMapData(migrateDraft(json));
 }
 
 export function downloadJson(filename: string, text: string): void {
