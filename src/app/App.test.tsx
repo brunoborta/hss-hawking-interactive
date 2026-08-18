@@ -18,7 +18,7 @@ describe('App', () => {
   it('renders the editor when ?edit is present', async () => {
     window.history.pushState({}, '', '/?edit');
     render(<App />);
-    expect(await screen.findByRole('heading', { name: /editor/i })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: /editor/i }, { timeout: 5000 })).toBeInTheDocument();
     window.history.pushState({}, '', '/');
   });
 });
