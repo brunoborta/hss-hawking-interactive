@@ -16,6 +16,8 @@ export default function EditorApp() {
   const hydrated = useEditorStore((s) => s.hydrated);
   const dispatch = useEditorStore((s) => s.dispatch);
   const hasSavedDraft = useEditorStore((s) => s.hasSavedDraft);
+  const draftNotice = useEditorStore((s) => s.draftNotice);
+  const clearDraftNotice = useEditorStore((s) => s.clearDraftNotice);
 
   const [visible, setVisible] = useState<VisibleSet>(() => allVisible());
   const [refVisible, setRefVisible] = useState(true);
@@ -51,6 +53,24 @@ export default function EditorApp() {
           />
         </MapView>
         <Legend visible={visible} counts={counts} onChange={setVisible} />
+        {draftNotice && (
+          <div
+            role="status"
+            className="pointer-events-auto absolute left-1/2 top-3 z-[1100] max-w-xl -translate-x-1/2 rounded border border-cyan-line/60 bg-panel/95 px-3 py-2 text-xs text-white shadow-lg"
+          >
+            {draftNotice.kind === 'migrated' ? (
+              <span>Your saved draft used renamed categories and was migrated automatically. Review, then export again.</span>
+            ) : (
+              <span>
+                Your saved draft was invalid and has been discarded; the editor loaded the published data instead.
+                <span className="block text-white/60">{draftNotice.errors.slice(0, 3).join(' · ')}</span>
+              </span>
+            )}
+            <button type="button" className="ml-3 text-cyan-line hover:underline" onClick={clearDraftNotice}>
+              Dismiss
+            </button>
+          </div>
+        )}
       </div>
       <EditorPanel
         referenceVisible={refVisible}

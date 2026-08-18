@@ -25,6 +25,11 @@ describe('parseImportText', () => {
     const bad = parseImportText(JSON.stringify({ ...emptyMapData(), version: 3 }));
     expect(bad.ok).toBe(false);
   });
+  it('migrates renamed categories on import', () => {
+    const r = parseImportText(JSON.stringify({ ...emptyMapData(), pois: [{ id: 'pipe-lever-hub-01', category: 'pipe-lever', zone: 'hub', x: 1, y: 1 }] }));
+    expect(r.ok).toBe(true);
+    if (r.ok) expect(r.data.pois[0]).toMatchObject({ id: 'pipe-lever-blue-hub-01', category: 'pipe-lever-blue' });
+  });
   it('round-trips serialized data', () => {
     const r = parseImportText(serializeMapData(emptyMapData()));
     expect(r.ok).toBe(true);
