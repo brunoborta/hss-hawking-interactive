@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { CATEGORIES, type CategoryId } from '../data/categories';
 import { publishedData } from '../data/publishedData';
 import { EditorTools } from './EditorTools';
 import { Inspector } from './Inspector';
@@ -31,6 +32,11 @@ export function EditorPanel({
   const fileRef = useRef<HTMLInputElement>(null);
 
   const selected = draft.pois.find((p) => p.id === selectedId) ?? null;
+  const exhausted = new Set<CategoryId>(
+    CATEGORIES.filter(
+      (c) => c.maxCount !== undefined && draft.pois.filter((p) => p.category === c.id).length >= c.maxCount,
+    ).map((c) => c.id),
+  );
 
   const onImportFile = async (file: File) => {
     const r = parseImportText(await file.text());
@@ -58,6 +64,7 @@ export function EditorPanel({
           tool={tool}
           onSetTool={(t) => dispatch({ type: 'setTool', tool: t })}
           hasSelection={!!selected}
+          exhausted={exhausted}
           onDeleteSelected={() => selected && dispatch({ type: 'deletePoi', id: selected.id })}
         />
       </section>

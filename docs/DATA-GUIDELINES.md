@@ -18,6 +18,18 @@ schema (`src/data/schema.ts`). Anything that violates these rules fails validati
 | `media.src` | no | `media/<id>.<ext>`, file placed in `public/media/` | `media/black-box-laboratory-01.gif` | `screenshots/bb.gif` |
 | `notes` | no | maintainer notes, never shown | | |
 
+## Authoring defaults (applied by the editor on creation)
+
+| Category | Prefilled name | Game modes pre-checked | Other |
+|---|---|---|---|
+| healing / ammo / capsule / pipe-lever | `Healing Point - <Zone>` / `Ammo Point - <Zone>` / `Respawn Capsule - <Zone>` / `Pipe Lever - <Zone>` | all four | lever gets description "The lever can be any number from 1-8" |
+| self-destruct | `Self-Destruction - <Zone>` | `destroy-the-area` | |
+| black-box | `Black Box - <Zone>` | `extract-the-data` | |
+| weapon | `Weapon - <Zone>` | `kill-the-specimen` | |
+| info / command-deck / shuttle | `<Label> - <Zone>` | all four | `command-deck` and `shuttle`: **at most one** POI each (schema-enforced) |
+
+Replace the zone in the prefilled name with the actual place (e.g. `Ammo Point - Engines`); uncheck modes that don't apply.
+
 ## Workflow
 
 1. Open the site with `?edit`, place/edit POIs, **Export JSON**.

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { CATEGORY_IDS } from './categories';
+import { CATEGORY_IDS, CATEGORIES } from './categories';
 import { ZONE_IDS } from './zones';
 import { GAME_MODE_IDS } from './gameModes';
 import { parsePoiId, POI_ID_PATTERN } from '../lib/ids';
@@ -53,12 +53,26 @@ export const mapDataSchema = z
   })
   .superRefine((data, ctx) => {
     const seen = new Set<string>();
+    const perCategory = new Map<string, number[]>();
     data.pois.forEach((poi, i) => {
       if (seen.has(poi.id)) {
         ctx.addIssue({ code: 'custom', path: ['pois', i, 'id'], message: `duplicate id "${poi.id}"` });
       }
       seen.add(poi.id);
+      perCategory.set(poi.category, [...(perCategory.get(poi.category) ?? []), i]);
     });
+    for (const cat of CATEGORIES) {
+      const idx = perCategory.get(cat.id) ?? [];
+      if (cat.maxCount !== undefined && idx.length > cat.maxCount) {
+        for (const i of idx.slice(cat.maxCount)) {
+          ctx.addIssue({
+            code: 'custom',
+            path: ['pois', i, 'category'],
+            message: `at most ${cat.maxCount} "${cat.id}" POI allowed (found ${idx.length})`,
+          });
+        }
+      }
+    }
   });
 
 export type Poi = z.infer<typeof poiSchema>;

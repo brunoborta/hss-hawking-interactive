@@ -1,5 +1,159 @@
 {
   "version": 1,
-  "image": { "width": 1395, "height": 651 },
-  "pois": []
+  "image": {
+    "width": 1395,
+    "height": 651
+  },
+  "pois": [
+    {
+      "id": "healing-machinery-01",
+      "category": "healing",
+      "zone": "machinery",
+      "x": 1103.8,
+      "y": 346.2,
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ],
+      "name": "Healing Point - Engines"
+    },
+    {
+      "id": "ammo-machinery-01",
+      "category": "ammo",
+      "zone": "machinery",
+      "x": 1139.9,
+      "y": 263.5,
+      "name": "Ammo Point - Engines",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ]
+    },
+    {
+      "id": "ammo-machinery-02",
+      "category": "ammo",
+      "zone": "machinery",
+      "x": 872.6,
+      "y": 349.1,
+      "name": "Ammo Point - Red Pipes",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ]
+    },
+    {
+      "id": "capsule-machinery-01",
+      "category": "capsule",
+      "zone": "machinery",
+      "x": 1161.1,
+      "y": 412.7,
+      "name": "Respawn Capsule - Engine B",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ]
+    },
+    {
+      "id": "capsule-machinery-02",
+      "category": "capsule",
+      "zone": "machinery",
+      "x": 1158.9,
+      "y": 225.3,
+      "name": "Respawn Capsule - Engine A",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ]
+    },
+    {
+      "id": "capsule-machinery-03",
+      "category": "capsule",
+      "zone": "machinery",
+      "x": 872.9,
+      "y": 302.4,
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ],
+      "name": "Respawn Capsule - Blue Pipes"
+    },
+    {
+      "id": "self-destruct-machinery-01",
+      "category": "self-destruct",
+      "zone": "machinery",
+      "x": 1171,
+      "y": 321,
+      "name": "Self-Destruction - Main Computer",
+      "description": "Main point of the Destroy the Area. Run the tests on the computer in the center of this area. After that, increase the speed in both engines (A and B): You can reach the computer of both engines upstairs.",
+      "gameModes": [
+        "destroy-the-area"
+      ]
+    },
+    {
+      "id": "self-destruct-machinery-02",
+      "category": "self-destruct",
+      "zone": "machinery",
+      "x": 1311,
+      "y": 224.6,
+      "gameModes": [
+        "destroy-the-area"
+      ],
+      "name": "Self-Destruction - Computer Engine A",
+      "description": "Increase the speed for 200% to start the self destruction. If you increase the speed on Engine B already, the self destruction will start and you have 2:30 minutes to go back to the shutter."
+    },
+    {
+      "id": "self-destruct-machinery-03",
+      "category": "self-destruct",
+      "zone": "machinery",
+      "x": 1312.4,
+      "y": 409.9,
+      "description": "Increase the speed for 200% to start the self destruction. If you increase the speed on Engine A already, the self destruction will start and you have 2:30 minutes to go back to the shutter.",
+      "name": "Self-Destruction - Computer Engine B",
+      "gameModes": [
+        "destroy-the-area"
+      ]
+    },
+    {
+      "id": "pipe-lever-machinery-01",
+      "category": "pipe-lever",
+      "zone": "machinery",
+      "x": 863,
+      "y": 302.7,
+      "name": "Blue Pipe Lever",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ],
+      "description": "The lever can be any number from 1-8"
+    },
+    {
+      "id": "pipe-lever-machinery-02",
+      "category": "pipe-lever",
+      "zone": "machinery",
+      "x": 890,
+      "y": 269.5,
+      "name": "Blue Pipe Lever",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ],
+      "description": "The lever can be any number from 1-8"
+    }
+  ]
 }

@@ -1,4 +1,4 @@
-import { CATEGORIES } from '../data/categories';
+import { CATEGORIES, type CategoryId } from '../data/categories';
 import { CategoryIcon } from '../icons/CategoryIcon';
 import type { Tool } from './editorReducer';
 
@@ -11,11 +11,14 @@ export function EditorTools({
   onSetTool,
   onDeleteSelected,
   hasSelection,
+  exhausted,
 }: {
   tool: Tool;
   onSetTool: (t: Tool) => void;
   onDeleteSelected: () => void;
   hasSelection: boolean;
+  /** Categories whose maxCount is already reached (their Add button is disabled). */
+  exhausted?: ReadonlySet<CategoryId>;
 }) {
   return (
     <div className="flex flex-col gap-2">
@@ -30,13 +33,15 @@ export function EditorTools({
       <div className="flex flex-wrap gap-1">
         {CATEGORIES.map((c) => {
           const active = tool.kind === 'add' && tool.category === c.id;
+          const full = exhausted?.has(c.id) ?? false;
           return (
             <button
               key={c.id}
               type="button"
-              title={`Add ${c.label}`}
+              title={full ? `${c.label}: only ${c.maxCount} allowed (already placed)` : `Add ${c.label}`}
               aria-pressed={active}
-              className={`${btn} flex items-center gap-1 ${active ? on : off}`}
+              disabled={full && !active}
+              className={`${btn} flex items-center gap-1 disabled:cursor-not-allowed disabled:opacity-35 ${active ? on : off}`}
               onClick={() => onSetTool(active ? { kind: 'select' } : { kind: 'add', category: c.id })}
             >
               <CategoryIcon category={c.id} size={16} />
