@@ -60,6 +60,9 @@ body,
 .poi-marker:hover svg {
   transform: scale(1.15);
 }
+.poi-marker--command-deck svg {
+  transform-origin: 50% 94%;
+}
 .poi-marker:hover {
   z-index: 1000 !important;
 }

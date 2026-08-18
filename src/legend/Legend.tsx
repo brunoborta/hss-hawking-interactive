@@ -35,7 +35,7 @@ export function Legend({ visible, counts, onChange }: LegendProps) {
       <div
         id="legend-panel"
         className={
-          'pointer-events-auto w-full max-w-3xl rounded-t-xl border border-cyan-line/50 bg-panel/85 ' +
+          'pointer-events-auto w-full max-w-4xl rounded-t-xl border border-cyan-line/50 bg-panel/85 ' +
           'px-4 py-3 shadow-[0_0_24px_rgba(111,214,232,0.15)] backdrop-blur-sm ' +
           'transition-transform duration-200 md:rounded-xl ' +
           (open ? 'translate-y-0' : 'translate-y-full md:translate-y-0')

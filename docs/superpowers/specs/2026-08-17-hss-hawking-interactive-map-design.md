@@ -88,7 +88,8 @@ type MapData = {
 
 type CategoryId =
   | "healing" | "ammo" | "capsule" | "info"
-  | "self-destruct" | "black-box" | "pipe-lever" | "weapon";
+  | "self-destruct" | "black-box" | "pipe-lever" | "weapon"
+  | "command-deck" | "shuttle";   // added after MVP: single fixed spots (map pin / player ship)
 
 type ZoneId =
   | "shuttle-bay" | "production" | "laboratory"
@@ -139,7 +140,7 @@ Data conventions are documented for humans in `docs/DATA-GUIDELINES.md` (short, 
 **Legend** — visually modelled on the in-game panel in the screenshot:
 
 - Bottom-centre panel, dark translucent, thin cyan border, rounded corners, uppercase spaced typography.
-- CSS grid with `grid-auto-flow: column` and 3 rows, so 8 categories form 3 columns (3+3+2); a new category simply starts a new column. Icon left, label right.
+- CSS grid with `grid-auto-flow: column` and 3 rows, so 10 categories form 4 columns (3+3+3+1); a new category simply starts a new column. Icon left, label right.
 - Click toggles a category; disabled items are dimmed (~35% opacity, desaturated icon). Double-click = "only this one". Small **All** / **None** buttons at the panel's right edge in the same style.
 - Per-category counts appear only in a hover tooltip, not in the panel.
 - Mobile: the panel becomes a **pull-up drawer** with a handle at the bottom edge.

@@ -11,6 +11,17 @@ function badge(color: string, glyph: string, glyphColor = '#0b2a33'): string {
 
 const c = (id: CategoryId) => CATEGORY_BY_ID[id].color;
 
+/** Map-style pin whose tip sits at the bottom centre of the viewBox (12, 22.5). */
+function pin(color: string): string {
+  return (
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">` +
+    `<path d="M12 1.5c-4.1 0-7.5 3.3-7.5 7.4 0 5.4 7.5 13.6 7.5 13.6s7.5-8.2 7.5-13.6c0-4.1-3.4-7.4-7.5-7.4z" ` +
+    `fill="${color}" stroke="#0b2a33" stroke-width="1.5" stroke-linejoin="round"/>` +
+    `<circle cx="12" cy="9" r="2.8" fill="#0b2a33"/>` +
+    `</svg>`
+  );
+}
+
 export const ICON_SVG: Record<CategoryId, string> = {
   healing: badge(c('healing'), `<path d="M12 6.5v11M6.5 12h11" stroke-width="3" fill="none"/>`),
   ammo: badge(
@@ -40,6 +51,11 @@ export const ICON_SVG: Record<CategoryId, string> = {
   ),
   weapon: badge(
     c('weapon'),
-    `<path d="M5 10h13v3h-6l-1 4h-3l1-4H5z" stroke-width="1" /><path d="M18 10.5h1.5" stroke-width="2"/>`,
+    `<path d="M5 10h13v3h-6l-1 4h-3l1-4H5z" stroke-width="1"/><path d="M18 10.5h1.5" stroke-width="2"/>`,
+  ),
+  'command-deck': pin(c('command-deck')),
+  shuttle: badge(
+    c('shuttle'),
+    `<path d="M12 4.5l3 5.5v4.5l2.5 2.5v1.5l-3.5-1V19h-4v-1.5l-3.5 1v-1.5l2.5-2.5V10z" stroke-width="1"/>`,
   ),
 };
