@@ -22,7 +22,7 @@ schema (`src/data/schema.ts`). Anything that violates these rules fails validati
 
 | Category | Prefilled name | Game modes pre-checked | Other |
 |---|---|---|---|
-| healing / ammo / capsule / pipe-lever | `Healing Point - <Zone>` / `Ammo Point - <Zone>` / `Respawn Capsule - <Zone>` / `Pipe Lever - <Zone>` | all four | lever gets description "The lever can be any number from 1-8" |
+| healing / ammo / capsule / pipe-lever | `Healing Point - <Zone>` / `Ammo Point - <Zone>` / `Respawn Capsule - <Zone>` / `Pipe Lever - <Zone>` | all four | lever gets description "Lever number is randomized (1-8) each run" |
 | self-destruct | `Self-Destruction - <Zone>` | `destroy-the-area` | |
 | black-box | `Black Box - <Zone>` | `extract-the-data` | |
 | weapon | `Weapon - <Zone>` | `kill-the-specimen` | |

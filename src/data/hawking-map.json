@@ -138,7 +138,7 @@
         "destroy-the-area",
         "capture-the-specimen"
       ],
-      "description": "The lever can be any number from 1-8"
+      "description": "Lever number is randomized (1-8) each run"
     },
     {
       "id": "pipe-lever-machinery-02",
@@ -153,7 +153,7 @@
         "destroy-the-area",
         "capture-the-specimen"
       ],
-      "description": "The lever can be any number from 1-8"
+      "description": "Lever number is randomized (1-8) each run"
     }
   ]
 }

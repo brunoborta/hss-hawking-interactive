@@ -27,7 +27,7 @@ describe('editorReducer', () => {
     expect(s.draft.pois[0]).toMatchObject({
       name: 'Pipe Lever - Hub',
       gameModes: ['extract-the-data', 'kill-the-specimen', 'destroy-the-area', 'capture-the-specimen'],
-      description: 'The lever can be any number from 1-8',
+      description: 'Lever number is randomized (1-8) each run',
     });
     s = editorReducer(s, { type: 'setTool', tool: { kind: 'add', category: 'self-destruct' } });
     s = editorReducer(s, { type: 'addPoi', x: 6, y: 6 });

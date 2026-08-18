@@ -47,7 +47,7 @@ export const CATEGORIES: readonly CategoryMeta[] = [
     label: 'Pipe Lever',
     color: '#7dd3fc',
     anchor: 'center',
-    defaults: { namePrefix: 'Pipe Lever', gameModes: ALL_MODES, description: 'The lever can be any number from 1-8' },
+    defaults: { namePrefix: 'Pipe Lever', gameModes: ALL_MODES, description: 'Lever number is randomized (1-8) each run' },
   },
   { id: 'weapon', label: 'Weapon', color: '#fb923c', anchor: 'center', defaults: { namePrefix: 'Weapon', gameModes: ['kill-the-specimen'] } },
   { id: 'command-deck', label: 'Command Deck', color: '#ffffff', anchor: 'bottom', defaults: { namePrefix: 'Command Deck', gameModes: ALL_MODES }, maxCount: 1 },
