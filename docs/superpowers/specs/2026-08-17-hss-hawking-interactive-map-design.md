@@ -193,3 +193,5 @@ Vitest unit tests for: schema (valid/invalid cases, id regex, uniqueness, bounds
 5. **"Suggest change"**: export only the diff vs. published data and open a pre-filled GitHub issue (no backend, GitHub account required).
 6. Search by POI/room name (currently judged low value).
 7. UI i18n; wiki-specific integration (embed or native-map JSON export).
+8. **Media upload in the editor**: instead of typing `media.src` by hand, the maintainer/contributor picks an image or GIF in the Inspector; the editor previews it (object URL), stores it alongside the draft (IndexedDB), and **Export** produces a `.zip` containing `hawking-map.json` plus `media/<id>.<ext>` files, ready to drop into `public/`. Import accepts the same zip. Editor also shows live schema-validity feedback (see final review notes).
+9. **Editor polish**: "Clear draft" button distinct from "Reset to published"; validate a rehydrated draft against the schema.
