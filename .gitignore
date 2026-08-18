@@ -141,3 +141,16 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# SDD scratch workspace
+.superpowers/
+
+# Build output
+dist
+
+# Local override files
+*.local
+
+# Asset tooling scratch output
+tools/rectify-preview.png
+tools/__pycache__/

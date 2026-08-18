@@ -1,0 +1,18 @@
+{
+  "src": "tools/source/ingame-screenshot.png",
+  "dst": "tools/source/hawking-base.webp",
+  "points": [
+    { "name": "shuttle-bay-nose",        "src": [200.7, 149.2], "dst": [323, 73] },
+    { "name": "production-north-wall",   "src": [127.7, 220.2], "dst": [154, 180] },
+    { "name": "production-bottom-left",  "src": [156.3, 362.8], "dst": [207, 434] },
+    { "name": "production-bottom",       "src": [210.3, 391.8], "dst": [325, 485] },
+    { "name": "crew-quarters-top-left",  "src": [380.5, 120.5], "dst": [672, 64] },
+    { "name": "crew-quarters-top-right", "src": [586.9, 79.3],  "dst": [1009, 42] },
+    { "name": "crew-quarters-mid",       "src": [485.8, 221.1], "dst": [852, 229] },
+    { "name": "hub-centre",              "src": [376.3, 306.8], "dst": [659, 351] },
+    { "name": "machinery-notch",         "src": [824.7, 259.3], "dst": [1349, 311] },
+    { "name": "machinery-bottom-right",  "src": [779.3, 397.7], "dst": [1294, 495] },
+    { "name": "laboratory-left",         "src": [301.9, 418.5], "dst": [511, 531] },
+    { "name": "laboratory-bottom",       "src": [410.2, 451.8], "dst": [717, 583] }
+  ]
+}
