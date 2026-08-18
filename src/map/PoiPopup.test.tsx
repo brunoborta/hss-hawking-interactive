@@ -14,7 +14,7 @@ describe('PoiPopup', () => {
           y: 2,
           description: 'Behind the crates.',
           variant: 'shotgun',
-          gameModes: ['classic'],
+          gameModes: ['kill-the-specimen'],
           media: { src: 'media/weapon-production-01.webp', alt: 'Shotgun' },
         }}
       />,
@@ -22,7 +22,7 @@ describe('PoiPopup', () => {
     expect(screen.getByRole('heading')).toHaveTextContent('Weapon — Production');
     expect(screen.getByText('Behind the crates.')).toBeInTheDocument();
     expect(screen.getByText(/shotgun/)).toBeInTheDocument();
-    expect(screen.getByText(/classic/)).toBeInTheDocument();
+    expect(screen.getByText(/Modes: Kill the Specimen/)).toBeInTheDocument();
     const img = screen.getByRole('img', { name: 'Shotgun' });
     expect(img).toHaveAttribute('src', expect.stringContaining('media/weapon-production-01.webp'));
     expect(img).toHaveAttribute('loading', 'lazy');

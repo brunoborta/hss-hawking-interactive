@@ -1,6 +1,7 @@
 import { CATEGORY_BY_ID } from '../data/categories';
 import type { Poi } from '../data/schema';
 import { ZONE_BY_ID } from '../data/zones';
+import { GAME_MODE_BY_ID } from '../data/gameModes';
 import { CategoryIcon } from '../icons/CategoryIcon';
 import { displayName } from '../lib/display';
 
@@ -35,7 +36,9 @@ export function PoiPopup({ poi }: { poi: Poi }) {
       )}
       {poi.description && <p className="leading-snug">{poi.description}</p>}
       {poi.gameModes && poi.gameModes.length > 0 && (
-        <p className="mt-2 text-xs text-white/60">Modes: {poi.gameModes.join(', ')}</p>
+        <p className="mt-2 text-xs text-white/60">
+          Modes: {poi.gameModes.map((m) => GAME_MODE_BY_ID[m].label).join(', ')}
+        </p>
       )}
     </div>
   );

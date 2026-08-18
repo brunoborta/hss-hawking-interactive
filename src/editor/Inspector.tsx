@@ -2,7 +2,10 @@ import { useState, type ReactNode } from 'react';
 import { CATEGORIES } from '../data/categories';
 import type { Poi } from '../data/schema';
 import { ZONES } from '../data/zones';
+import { GAME_MODES, type GameModeId } from '../data/gameModes';
 import { kebab } from '../lib/kebab';
+
+const GAME_MODE_ORDER = Object.fromEntries(GAME_MODES.map((m, i) => [m.id, i])) as Record<GameModeId, number>;
 
 type Patch = Partial<Omit<Poi, 'id'>> & { id?: string };
 
@@ -21,11 +24,10 @@ export function Inspector({ poi, onChange }: { poi: Poi; onChange: (patch: Patch
   const [advanced, setAdvanced] = useState(false);
   const [idText, setIdText] = useState(poi.id);
   const [variantText, setVariantText] = useState(poi.variant ?? '');
-  const [modesText, setModesText] = useState((poi.gameModes ?? []).join(', '));
 
   // Reset local text buffers only when the selected POI changes (poi.id) — i.e. a
   // different POI was selected, or the reducer regenerated the id after a
-  // category/zone change. Never resync from poi.variant/poi.gameModes identity
+  // category/zone change. Never resync from poi.variant identity
   // changes, since those change on every keystroke once the normalised patch is
   // echoed back through the store (that's the bug this buffering fixes).
   // Render-phase "adjusting state" pattern, kept lint-clean under
@@ -35,7 +37,6 @@ export function Inspector({ poi, onChange }: { poi: Poi; onChange: (patch: Patch
     setSyncedId(poi.id);
     setIdText(poi.id);
     setVariantText(poi.variant ?? '');
-    setModesText((poi.gameModes ?? []).join(', '));
   }
 
   return (
@@ -128,22 +129,32 @@ export function Inspector({ poi, onChange }: { poi: Poi; onChange: (patch: Patch
         />
       </Field>
 
-      <Field label="Game modes (comma-separated)" htmlFor="insp-modes">
-        <input
-          id="insp-modes"
-          className={input}
-          value={modesText}
-          onChange={(e) => {
-            setModesText(e.target.value);
-            const list = e.target.value.split(',').map(kebab).filter(Boolean);
-            onChange({ gameModes: list });
-          }}
-          onBlur={() => {
-            const list = modesText.split(',').map(kebab).filter(Boolean);
-            setModesText(list.join(', '));
-          }}
-        />
-      </Field>
+      <fieldset className="flex flex-col gap-1 text-xs">
+        <legend className="uppercase tracking-[0.15em] text-cyan-line/80">
+          Game modes <span className="normal-case tracking-normal text-white/50">(none checked = all modes)</span>
+        </legend>
+        {GAME_MODES.map((m) => {
+          const selected = poi.gameModes ?? [];
+          const checked = selected.includes(m.id);
+          return (
+            <label key={m.id} className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                checked={checked}
+                onChange={(e) => {
+                  const next: GameModeId[] = e.target.checked
+                    ? [...selected, m.id]
+                    : selected.filter((id) => id !== m.id);
+                  // canonical order keeps exports stable
+                  next.sort((a, b) => GAME_MODE_ORDER[a] - GAME_MODE_ORDER[b]);
+                  onChange({ gameModes: next });
+                }}
+              />
+              {m.label}
+            </label>
+          );
+        })}
+      </fieldset>
 
       <Field label="Media src (media/<id>.<ext>)" htmlFor="insp-media">
         <input id="insp-media" className={input} value={poi.media?.src ?? ''} onChange={(e) => onChange({ media: e.target.value ? { src: e.target.value, alt: poi.media?.alt } : undefined })} />

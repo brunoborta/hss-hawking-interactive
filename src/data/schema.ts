@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { CATEGORY_IDS } from './categories';
 import { ZONE_IDS } from './zones';
+import { GAME_MODE_IDS } from './gameModes';
 import { parsePoiId, POI_ID_PATTERN } from '../lib/ids';
 
 export const IMAGE_WIDTH = 1395;
@@ -24,7 +25,7 @@ export const poiSchema = z
       .refine((s) => !/[<>]/.test(s), 'description must be plain text (no HTML)')
       .optional(),
     variant: z.string().regex(KEBAB, 'variant must be kebab-case').optional(),
-    gameModes: z.array(z.string().regex(KEBAB, 'gameModes entries must be kebab-case')).optional(),
+    gameModes: z.array(z.enum(GAME_MODE_IDS)).optional(),
     media: z
       .object({
         src: z.string().regex(MEDIA_SRC, 'media.src must look like media/<id>.<ext>'),

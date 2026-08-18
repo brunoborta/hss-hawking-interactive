@@ -27,12 +27,12 @@ describe('Inspector', () => {
     expect(onChange).toHaveBeenLastCalledWith({ name: 'A' });
   });
 
-  it('game modes are comma-separated and kebab-normalised', async () => {
+  it('game modes are checkboxes; checking emits the canonical-ordered list', async () => {
     const onChange = vi.fn();
-    render(<Inspector poi={poi} onChange={onChange} />);
-    const modes = screen.getByLabelText(/game modes/i);
-    await userEvent.type(modes, 'Classic, Hard Core');
-    expect(onChange).toHaveBeenLastCalledWith({ gameModes: ['classic', 'hard-core'] });
+    render(<Inspector poi={{ ...poi, gameModes: ['destroy-the-area'] }} onChange={onChange} />);
+    expect(screen.getByRole('checkbox', { name: /destroy the area/i })).toBeChecked();
+    await userEvent.click(screen.getByRole('checkbox', { name: /extract the data/i }));
+    expect(onChange).toHaveBeenLastCalledWith({ gameModes: ['extract-the-data', 'destroy-the-area'] });
   });
 
   it('advanced toggle makes id editable', async () => {
@@ -43,13 +43,15 @@ describe('Inspector', () => {
     expect(id).not.toHaveAttribute('readonly');
   });
 
-  it('live: game modes keep raw text while typing and normalise on blur', async () => {
-    render(<LiveInspector initial={{ id: 'ammo-hub-01', category: 'ammo', zone: 'hub', x: 10, y: 20 }} />);
-    const modes = screen.getByLabelText(/game modes/i);
-    await userEvent.type(modes, 'Classic, Hard Core');
-    expect(modes).toHaveValue('Classic, Hard Core');
-    await userEvent.tab();
-    expect(modes).toHaveValue('classic, hard-core');
+  it('live: unchecking the last game mode empties the list', async () => {
+    render(<LiveInspector initial={{ id: 'ammo-hub-01', category: 'ammo', zone: 'hub', x: 10, y: 20, gameModes: ['kill-the-specimen'] }} />);
+    const box = screen.getByRole('checkbox', { name: /kill the specimen/i });
+    expect(box).toBeChecked();
+    await userEvent.click(box);
+    expect(box).not.toBeChecked();
+    for (const m of ['extract the data', 'destroy the area', 'capture the specimen']) {
+      expect(screen.getByRole('checkbox', { name: new RegExp(m, 'i') })).not.toBeChecked();
+    }
   });
 
   it('live: variant allows hyphens/spaces while typing and normalises on blur', async () => {

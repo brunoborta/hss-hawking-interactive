@@ -14,7 +14,7 @@ schema (`src/data/schema.ts`). Anything that violates these rules fails validati
 | `name` | no | Title Case, English, don't repeat the category. Omitted → "Category — Zone" | `Near the Airlock` | `healing point near airlock` |
 | `description` | no | 1–2 sentences, plain text, ≤ 280 chars, no HTML | `Spawns only after the reactor puzzle.` | `<b>Important!</b>` |
 | `variant` | no | kebab-case; for weapons, the weapon type | `shotgun` | `Shot Gun` |
-| `gameModes` | no | kebab-case list; absent = all modes | `["classic"]` | `["Classic Mode"]` |
+| `gameModes` | no | list of `extract-the-data, kill-the-specimen, destroy-the-area, capture-the-specimen` (checkboxes in the editor); absent = all modes | `["kill-the-specimen"]` | `["Classic Mode"]` |
 | `media.src` | no | `media/<id>.<ext>`, file placed in `public/media/` | `media/black-box-laboratory-01.gif` | `screenshots/bb.gif` |
 | `notes` | no | maintainer notes, never shown | | |
 
