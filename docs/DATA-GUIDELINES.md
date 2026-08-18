@@ -26,7 +26,8 @@ schema (`src/data/schema.ts`). Anything that violates these rules fails validati
 | self-destruct | `Self-Destruction - <Zone>` | `destroy-the-area` | |
 | black-box | `Black Box - <Zone>` | `extract-the-data` | |
 | weapon | `Weapon - <Zone>` | `kill-the-specimen` | |
-| info / command-deck / shuttle | `<Label> - <Zone>` | all four | `command-deck` and `shuttle`: **at most one** POI each (schema-enforced) |
+| info | `Information - <Zone>` | all four | |
+| command-deck / shuttle | `Command Deck` / `Shuttle` (no zone in the name) | all four | **at most one** each; zone fixed to `hub` / `shuttle-bay` on creation |
 
 Replace the zone in the prefilled name with the actual place (e.g. `Ammo Point - Engines`); uncheck modes that don't apply.
 

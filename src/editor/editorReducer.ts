@@ -89,7 +89,7 @@ export function editorReducer(state: EditorState, action: EditorAction): EditorS
       if (meta.maxCount !== undefined && state.draft.pois.filter((p) => p.category === category).length >= meta.maxCount) {
         return state;
       }
-      const zone = state.lastZone;
+      const zone = meta.defaults.zone ?? state.lastZone;
       const id = nextPoiId(state.draft.pois.map((p) => p.id), category, zone);
       const poi: Poi = {
         id,
@@ -97,7 +97,10 @@ export function editorReducer(state: EditorState, action: EditorAction): EditorS
         zone,
         x: round1(action.x),
         y: round1(action.y),
-        name: `${meta.defaults.namePrefix} - ${ZONE_BY_ID[zone].label}`,
+        name:
+          meta.defaults.nameWithZone === false
+            ? meta.defaults.namePrefix
+            : `${meta.defaults.namePrefix} - ${ZONE_BY_ID[zone].label}`,
         gameModes: [...meta.defaults.gameModes],
         ...(meta.defaults.description ? { description: meta.defaults.description } : {}),
       };

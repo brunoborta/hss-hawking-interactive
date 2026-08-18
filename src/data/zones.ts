@@ -20,7 +20,7 @@ export const ZONES: readonly ZoneMeta[] = [
   { id: 'laboratory', label: 'Laboratory' },
   { id: 'crew-quarters', label: 'Crew Quarters' },
   { id: 'machinery', label: 'Machinery' },
-  { id: 'hub', label: 'Hub' },
+  { id: 'hub', label: 'Central Hub' },
 ];
 
 export const ZONE_BY_ID = Object.fromEntries(ZONES.map((z) => [z.id, z])) as Record<ZoneId, ZoneMeta>;
