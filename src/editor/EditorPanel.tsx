@@ -79,7 +79,19 @@ export function EditorPanel({
       </section>
 
       <section>
-        <h3 className="mb-1 text-[10px] uppercase tracking-[0.2em] text-white/50">Selected POI</h3>
+        <div className="mb-1 flex items-center justify-between">
+          <h3 className="text-[10px] uppercase tracking-[0.2em] text-white/50">Selected POI</h3>
+          {selected && (
+            <button
+              type="button"
+              className={btn}
+              title="Deselect this POI and keep going (Esc). Everything is autosaved."
+              onClick={() => dispatch({ type: 'select', id: null })}
+            >
+              Done
+            </button>
+          )}
+        </div>
         {selected ? (
           <Inspector poi={selected} onChange={(patch) => dispatch({ type: 'updatePoi', id: selected.id, patch })} />
         ) : (

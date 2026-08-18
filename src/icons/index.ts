@@ -56,6 +56,7 @@ export const ICON_SVG: Record<CategoryId, string> = {
   'command-deck': pin(c('command-deck')),
   shuttle: badge(
     c('shuttle'),
-    `<path d="M12 4.5l3 5.5v4.5l2.5 2.5v1.5l-3.5-1V19h-4v-1.5l-3.5 1v-1.5l2.5-2.5V10z" stroke-width="1"/>`,
+    // ship silhouette drawn nose-up, rotated to point left (the player's ship approaches from the left)
+    `<g transform="rotate(-90 12 12)"><path d="M12 4.5l3 5.5v4.5l2.5 2.5v1.5l-3.5-1V19h-4v-1.5l-3.5 1v-1.5l2.5-2.5V10z" stroke-width="1"/></g>`,
   ),
 };

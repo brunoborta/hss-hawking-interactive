@@ -137,7 +137,13 @@ export function Inspector({ poi, onChange }: { poi: Poi; onChange: (patch: Patch
           const selected = poi.gameModes ?? [];
           const checked = selected.includes(m.id);
           return (
-            <label key={m.id} className="flex items-center gap-2">
+            <label
+              key={m.id}
+              className={
+                'flex cursor-pointer items-center gap-2 rounded border px-2 py-1 transition-colors ' +
+                (checked ? 'border-cyan-line/70 bg-cyan-line/10 text-white' : 'border-cyan-line/25 text-white/80 hover:bg-white/5')
+              }
+            >
               <input
                 type="checkbox"
                 checked={checked}
