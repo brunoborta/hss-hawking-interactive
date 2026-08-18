@@ -1,4 +1,5 @@
 import { GAME_MODE_IDS, type GameModeId } from './gameModes';
+import type { ZoneId } from './zones';
 
 export const CATEGORY_IDS = [
   'healing',
@@ -7,7 +8,8 @@ export const CATEGORY_IDS = [
   'info',
   'self-destruct',
   'black-box',
-  'pipe-lever',
+  'pipe-lever-blue',
+  'pipe-lever-red',
   'weapon',
   'command-deck',
   'shuttle',
@@ -23,8 +25,12 @@ export interface CategoryMeta {
   anchor: 'center' | 'bottom';
   /** Authoring defaults applied by the editor when a POI of this category is created. */
   defaults: {
-    /** Name is prefilled as `${namePrefix} - ${zone label}`; the author replaces the zone with the place. */
+    /** Name is prefilled as `${namePrefix} - ${zone label}` (or just `namePrefix` when `nameWithZone` is false). */
     namePrefix: string;
+    /** Append " - <Zone label>" to the prefilled name (default true). Unique landmarks set this to false. */
+    nameWithZone?: boolean;
+    /** Zone assigned on creation instead of the last-used zone (unique landmarks live in a known zone). */
+    zone?: ZoneId;
     /** Game modes pre-checked on creation (the author can uncheck). */
     gameModes: readonly GameModeId[];
     description?: string;
@@ -43,15 +49,22 @@ export const CATEGORIES: readonly CategoryMeta[] = [
   { id: 'self-destruct', label: 'Self-Destruction', color: '#f87171', anchor: 'center', defaults: { namePrefix: 'Self-Destruction', gameModes: ['destroy-the-area'] } },
   { id: 'black-box', label: 'Black Box', color: '#c084fc', anchor: 'center', defaults: { namePrefix: 'Black Box', gameModes: ['extract-the-data'] } },
   {
-    id: 'pipe-lever',
-    label: 'Pipe Lever',
+    id: 'pipe-lever-blue',
+    label: 'Blue Pipe Lever',
     color: '#7dd3fc',
     anchor: 'center',
-    defaults: { namePrefix: 'Pipe Lever', gameModes: ALL_MODES, description: 'Lever number is randomized (1-8) each run' },
+    defaults: { namePrefix: 'Blue Pipe Lever', gameModes: ALL_MODES, description: 'Lever number is randomized (1-8) each run' },
+  },
+  {
+    id: 'pipe-lever-red',
+    label: 'Red Pipe Lever',
+    color: '#ef4444',
+    anchor: 'center',
+    defaults: { namePrefix: 'Red Pipe Lever', gameModes: ALL_MODES, description: 'Lever number is randomized (1-8) each run' },
   },
   { id: 'weapon', label: 'Weapon', color: '#fb923c', anchor: 'center', defaults: { namePrefix: 'Weapon', gameModes: ['kill-the-specimen'] } },
-  { id: 'command-deck', label: 'Command Deck', color: '#ffffff', anchor: 'bottom', defaults: { namePrefix: 'Command Deck', gameModes: ALL_MODES }, maxCount: 1 },
-  { id: 'shuttle', label: 'Shuttle', color: '#22d3ee', anchor: 'center', defaults: { namePrefix: 'Shuttle', gameModes: ALL_MODES }, maxCount: 1 },
+  { id: 'command-deck', label: 'Command Deck', color: '#ffffff', anchor: 'bottom', defaults: { namePrefix: 'Command Deck', gameModes: ALL_MODES, nameWithZone: false, zone: 'hub' }, maxCount: 1 },
+  { id: 'shuttle', label: 'Shuttle', color: '#22d3ee', anchor: 'center', defaults: { namePrefix: 'Shuttle', gameModes: ALL_MODES, nameWithZone: false, zone: 'shuttle-bay' }, maxCount: 1 },
 ];
 
 export const CATEGORY_BY_ID = Object.fromEntries(CATEGORIES.map((c) => [c.id, c])) as Record<

@@ -11,6 +11,9 @@ function badge(color: string, glyph: string, glyphColor = '#0b2a33'): string {
 
 const c = (id: CategoryId) => CATEGORY_BY_ID[id].color;
 
+const LEVER_GLYPH =
+  `<path d="M7 17h10M12 17V9" stroke-width="2.5" fill="none"/><path d="M12 9l4-3.5" stroke-width="2.5" fill="none"/><circle cx="16.3" cy="5.3" r="1.6" stroke="none"/>`;
+
 /** Map-style pin whose tip sits at the bottom centre of the viewBox (12, 22.5). */
 function pin(color: string): string {
   return (
@@ -45,10 +48,8 @@ export const ICON_SVG: Record<CategoryId, string> = {
     c('black-box'),
     `<rect x="6.5" y="8" width="11" height="9" rx="1.2" stroke-width="1.5" fill="none"/><path d="M6.5 11h11M9.5 8V6.5h5V8" stroke-width="1.5" fill="none"/>`,
   ),
-  'pipe-lever': badge(
-    c('pipe-lever'),
-    `<path d="M7 17h10M12 17V9" stroke-width="2.5" fill="none"/><path d="M12 9l4-3.5" stroke-width="2.5" fill="none"/><circle cx="16.3" cy="5.3" r="1.6" stroke="none"/>`,
-  ),
+  'pipe-lever-blue': badge(c('pipe-lever-blue'), LEVER_GLYPH),
+  'pipe-lever-red': badge(c('pipe-lever-red'), LEVER_GLYPH),
   weapon: badge(
     c('weapon'),
     `<path d="M5 10h13v3h-6l-1 4h-3l1-4H5z" stroke-width="1"/><path d="M18 10.5h1.5" stroke-width="2"/>`,
