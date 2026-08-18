@@ -1,4 +1,5 @@
-import type { CategoryId } from '../data/categories';
+import { CATEGORY_BY_ID, type CategoryId } from '../data/categories';
+import { ZONE_BY_ID } from '../data/zones';
 import { IMAGE_HEIGHT, IMAGE_WIDTH, type MapData, type Poi } from '../data/schema';
 import type { ZoneId } from '../data/zones';
 import { nextPoiId, parsePoiId, POI_ID_PATTERN } from '../lib/ids';
@@ -84,9 +85,22 @@ export function editorReducer(state: EditorState, action: EditorAction): EditorS
     case 'addPoi': {
       if (state.tool.kind !== 'add') return state;
       const category = state.tool.category;
+      const meta = CATEGORY_BY_ID[category];
+      if (meta.maxCount !== undefined && state.draft.pois.filter((p) => p.category === category).length >= meta.maxCount) {
+        return state;
+      }
       const zone = state.lastZone;
       const id = nextPoiId(state.draft.pois.map((p) => p.id), category, zone);
-      const poi: Poi = { id, category, zone, x: round1(action.x), y: round1(action.y) };
+      const poi: Poi = {
+        id,
+        category,
+        zone,
+        x: round1(action.x),
+        y: round1(action.y),
+        name: `${meta.defaults.namePrefix} - ${ZONE_BY_ID[zone].label}`,
+        gameModes: [...meta.defaults.gameModes],
+        ...(meta.defaults.description ? { description: meta.defaults.description } : {}),
+      };
       const draft: MapData = { ...state.draft, pois: [...state.draft.pois, poi] };
       return { ...state, ...pushHistory(state, draft), selectedId: id, lastEdit: null };
     }

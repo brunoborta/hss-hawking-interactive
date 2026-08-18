@@ -69,6 +69,18 @@ describe('mapDataSchema', () => {
     expect(safeParseMapData(withPois([{ ...validPoi, media: { src: 'foo.png' } }])).ok).toBe(false);
   });
 
+  it('rejects more than one command-deck / shuttle', () => {
+    const cd = (n: string, x: number) => ({ id: `command-deck-hub-${n}`, category: 'command-deck', zone: 'hub', x, y: 5 });
+    expect(safeParseMapData(withPois([cd('01', 1)])).ok).toBe(true);
+    const r = safeParseMapData(withPois([cd('01', 1), cd('02', 2)]));
+    expect(r.ok).toBe(false);
+    if (!r.ok) expect(r.errors.join('\n')).toMatch(/at most 1 "command-deck"/);
+    expect(safeParseMapData(withPois([
+      { id: 'shuttle-shuttle-bay-01', category: 'shuttle', zone: 'shuttle-bay', x: 1, y: 1 },
+      { id: 'shuttle-shuttle-bay-02', category: 'shuttle', zone: 'shuttle-bay', x: 2, y: 2 },
+    ])).ok).toBe(false);
+  });
+
   it('rejects wrong version or image size', () => {
     expect(safeParseMapData({ ...emptyMapData(), version: 2 }).ok).toBe(false);
     expect(safeParseMapData({ ...emptyMapData(), image: { width: 100, height: 651 } }).ok).toBe(false);

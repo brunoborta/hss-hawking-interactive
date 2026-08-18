@@ -20,6 +20,30 @@ describe('editorReducer', () => {
     expect(s.past).toHaveLength(1);
   });
 
+  it('addPoi applies category defaults: name "<prefix> - <zone>", game modes, description', () => {
+    let s = stateWith([]);
+    s = editorReducer(s, { type: 'setTool', tool: { kind: 'add', category: 'pipe-lever' } });
+    s = editorReducer(s, { type: 'addPoi', x: 5, y: 5 });
+    expect(s.draft.pois[0]).toMatchObject({
+      name: 'Pipe Lever - Hub',
+      gameModes: ['extract-the-data', 'kill-the-specimen', 'destroy-the-area', 'capture-the-specimen'],
+      description: 'The lever can be any number from 1-8',
+    });
+    s = editorReducer(s, { type: 'setTool', tool: { kind: 'add', category: 'self-destruct' } });
+    s = editorReducer(s, { type: 'addPoi', x: 6, y: 6 });
+    expect(s.draft.pois[1]).toMatchObject({ name: 'Self-Destruction - Hub', gameModes: ['destroy-the-area'] });
+    expect(s.draft.pois[1]).not.toHaveProperty('description');
+  });
+
+  it('addPoi refuses a second POI of a maxCount=1 category', () => {
+    let s = stateWith([]);
+    s = editorReducer(s, { type: 'setTool', tool: { kind: 'add', category: 'command-deck' } });
+    s = editorReducer(s, { type: 'addPoi', x: 1, y: 1 });
+    const after = editorReducer(s, { type: 'addPoi', x: 2, y: 2 });
+    expect(after).toBe(s);
+    expect(after.draft.pois).toHaveLength(1);
+  });
+
   it('addPoi with select tool is a no-op', () => {
     const s0 = stateWith([]);
     expect(editorReducer(s0, { type: 'addPoi', x: 1, y: 1 })).toBe(s0);
