@@ -22,10 +22,10 @@ describe('editorReducer', () => {
 
   it('addPoi applies category defaults: name "<prefix> - <zone>", game modes, description', () => {
     let s = stateWith([]);
-    s = editorReducer(s, { type: 'setTool', tool: { kind: 'add', category: 'pipe-lever' } });
+    s = editorReducer(s, { type: 'setTool', tool: { kind: 'add', category: 'pipe-lever-blue' } });
     s = editorReducer(s, { type: 'addPoi', x: 5, y: 5 });
     expect(s.draft.pois[0]).toMatchObject({
-      name: 'Pipe Lever - Hub',
+      name: 'Blue Pipe Lever - Hub',
       gameModes: ['extract-the-data', 'kill-the-specimen', 'destroy-the-area', 'capture-the-specimen'],
       description: 'Lever number is randomized (1-8) each run',
     });

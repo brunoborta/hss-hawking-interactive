@@ -126,8 +126,8 @@
       ]
     },
     {
-      "id": "pipe-lever-machinery-01",
-      "category": "pipe-lever",
+      "id": "pipe-lever-blue-machinery-01",
+      "category": "pipe-lever-blue",
       "zone": "machinery",
       "x": 863,
       "y": 302.7,
@@ -141,8 +141,8 @@
       "description": "Lever number is randomized (1-8) each run"
     },
     {
-      "id": "pipe-lever-machinery-02",
-      "category": "pipe-lever",
+      "id": "pipe-lever-blue-machinery-02",
+      "category": "pipe-lever-blue",
       "zone": "machinery",
       "x": 890,
       "y": 269.5,

@@ -8,7 +8,7 @@ describe('Legend', () => {
   it('renders one button per category, pressed when visible', () => {
     render(<Legend visible={allVisible()} counts={{}} onChange={() => {}} />);
     const items = screen.getAllByRole('button', { pressed: true });
-    expect(items).toHaveLength(10);
+    expect(items).toHaveLength(11);
     expect(screen.getByRole('button', { name: /healing point/i })).toBeInTheDocument();
   });
 
@@ -18,7 +18,7 @@ describe('Legend', () => {
     await userEvent.click(screen.getByRole('button', { name: /ammunition/i }));
     const next = onChange.mock.calls[0]?.[0] as Set<string>;
     expect(next.has('ammo')).toBe(false);
-    expect(next.size).toBe(9);
+    expect(next.size).toBe(10);
   });
 
   it('double-click solos a category', async () => {
@@ -33,7 +33,7 @@ describe('Legend', () => {
     const onChange = vi.fn();
     render(<Legend visible={noneVisible()} counts={{}} onChange={onChange} />);
     await userEvent.click(screen.getByRole('button', { name: /^all$/i }));
-    expect((onChange.mock.calls[0]?.[0] as Set<string>).size).toBe(10);
+    expect((onChange.mock.calls[0]?.[0] as Set<string>).size).toBe(11);
     await userEvent.click(screen.getByRole('button', { name: /^none$/i }));
     expect((onChange.mock.calls[1]?.[0] as Set<string>).size).toBe(0);
   });
