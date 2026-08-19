@@ -26,7 +26,7 @@ describe('PoiPopup', () => {
     expect(screen.getByText(/shotgun/)).toBeInTheDocument();
     expect(screen.getByText(/Modes: Kill the Specimen/)).toBeInTheDocument();
     const img = screen.getByRole('img', { name: 'Weapon — Production' });
-    expect(img).toHaveAttribute('src', expect.stringContaining('media/pics/weapon-production-01.png'));
+    expect(img).toHaveAttribute('src', expect.stringContaining('media/pics/weapon-production-01.webp'));
     expect(img).toHaveAttribute('loading', 'lazy');
   });
 

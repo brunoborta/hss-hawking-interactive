@@ -13,7 +13,8 @@
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
     "validate:data": "vitest run src/data/publishedData.test.ts",
-    "media:report": "node scripts/media-report.mjs"
+    "media:report": "node scripts/media-report.mjs",
+    "pics:process": "python tools/process_pics.py"
   },
   "dependencies": {
     "leaflet": "^1.9.4",

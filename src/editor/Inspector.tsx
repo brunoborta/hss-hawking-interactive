@@ -170,7 +170,7 @@ export function Inspector({ poi, onChange }: { poi: Poi; onChange: (patch: Patch
           className="w-full rounded border border-cyan-line/30"
           fallback={
             <p className="rounded border border-dashed border-white/15 px-2 py-3 text-center text-white/40">
-              No image — drop <code>{poi.id}.png</code> in <code>public/media/pics/</code>
+              No image — drop <code>{poi.id}.png</code> in <code>tools/source/pics-raw/</code> and run <code>npm run pics:process</code>
             </p>
           }
         />

@@ -4,7 +4,7 @@ import { displayName } from '../lib/display';
 import { hasPoiImage, poiImageSrc } from '../lib/poiImage';
 
 /**
- * The POI's screenshot (public/media/pics/<id>.png), or `fallback` when there is
+ * The POI's screenshot (public/media/pics/<id>.webp), or `fallback` when there is
  * none. Not having an image is a normal state, not an error.
  */
 export function PoiImage({ poi, className, fallback = null }: { poi: Poi; className?: string; fallback?: ReactNode }) {

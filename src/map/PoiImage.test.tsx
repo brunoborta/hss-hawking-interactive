@@ -13,7 +13,7 @@ describe('PoiImage', () => {
   it('renders the conventional image when one exists', () => {
     render(<PoiImage poi={withImage} className="c" />);
     const img = screen.getByRole('img', { name: 'Ammunition — Central Hub' });
-    expect(img).toHaveAttribute('src', expect.stringContaining('media/pics/ammo-hub-01.png'));
+    expect(img).toHaveAttribute('src', expect.stringContaining('media/pics/ammo-hub-01.webp'));
     expect(img).toHaveAttribute('loading', 'lazy');
     expect(img).toHaveClass('c');
   });

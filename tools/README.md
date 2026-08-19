@@ -4,6 +4,7 @@ One-off asset generation. Outputs are committed to `public/`; rerun only when so
 
 - `source/hawking-base.webp` — original 1395×651 clean floor plan (map base).
 - `source/ingame-screenshot.png` — photo of the in-game wall map (POI reference).
+- `source/pics-raw/<poi-id>.png` — raw 1920×1080 in-game captures for each POI (HUD on).
 
 ## Setup
     python -m pip install -r tools/requirements.txt
@@ -35,3 +36,15 @@ at both ends of the ship with no visible doubling.
 Note the in-game panel renders the Production zone in grey rather than the base's
 magenta, so that region has less texture to match against; the two Production
 correspondences were taken from wall corners rather than zone fills.
+
+## POI screenshots → public/media/pics/<poi-id>.webp
+Drop a raw 1920×1080 capture named after the POI id in `tools/source/pics-raw/`, then:
+    npm run pics:process          # only new/changed sources (or: python tools/process_pics.py)
+    npm run pics:process -- --grid   # also writes tools/pics-grid.jpg (gitignored) to eyeball the results
+    npm run media:report          # which POIs still have no image
+
+The script removes the in-game HUD with a fixed mask + OpenCV inpainting (the HUD sits at
+fixed screen positions — the script refuses sources that are not 1920×1080), crops the
+performance-overlay strip at the top, lifts shadows (gamma 1.25) and exports 1280px-wide
+WebP (q80, ~20–80 KiB each). Commit both the raw PNG and the WebP. The viewer picks images
+up by id convention (`src/lib/poiImage.ts`), nothing else to configure.
