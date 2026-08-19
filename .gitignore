@@ -153,4 +153,5 @@ dist
 
 # Asset tooling scratch output
 tools/rectify-preview.png
+tools/pics-grid.jpg
 tools/__pycache__/

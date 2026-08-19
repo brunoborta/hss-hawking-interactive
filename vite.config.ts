@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 export const POI_IMAGES_DIR = 'public/media/pics';
 
-/** Exposes `virtual:poi-images` — the POI ids that have a `<id>.png` in public/media/pics. */
+/** Exposes `virtual:poi-images` — the POI ids that have a `<id>.webp` in public/media/pics. */
 function poiImages(): Plugin {
   const id = 'virtual:poi-images';
   const resolved = '\0' + id;
@@ -18,8 +18,8 @@ function poiImages(): Plugin {
     load(source) {
       if (source !== resolved) return null;
       const ids = readdirSync(POI_IMAGES_DIR)
-        .filter((f) => f.endsWith('.png'))
-        .map((f) => f.slice(0, -'.png'.length))
+        .filter((f) => f.endsWith('.webp'))
+        .map((f) => f.slice(0, -'.webp'.length))
         .sort();
       return `export const poiImageIds = ${JSON.stringify(ids)};`;
     },
