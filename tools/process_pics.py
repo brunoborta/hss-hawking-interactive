@@ -36,6 +36,7 @@ HUD_ZONES = [
     (1430, 830, 1820, 940),  # weapon slots
     (1680, 925, 1830, 975),  # "NO WEAPON"
     (1800, 855, 1890, 940),  # mouse icon
+    (15, 370, 175, 480),  # Discord overlay (voice participants, left edge)
 ]
 INPAINT_RADIUS = 7
 GAMMA = 1.25

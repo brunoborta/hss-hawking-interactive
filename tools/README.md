@@ -46,5 +46,6 @@ Drop a raw 1920×1080 capture named after the POI id in `tools/source/pics-raw/`
 The script removes the in-game HUD with a fixed mask + OpenCV inpainting (the HUD sits at
 fixed screen positions — the script refuses sources that are not 1920×1080), crops the
 performance-overlay strip at the top, lifts shadows (gamma 1.25) and exports 1280px-wide
-WebP (q80, ~20–80 KiB each). Commit both the raw PNG and the WebP. The viewer picks images
+WebP (q80, ~20–80 KiB each). The mask also covers the Discord voice overlay at the left
+edge. To redo one image, delete its WebP (or `--force` for all). Commit both the raw PNG and the WebP. The viewer picks images
 up by id convention (`src/lib/poiImage.ts`), nothing else to configure.
