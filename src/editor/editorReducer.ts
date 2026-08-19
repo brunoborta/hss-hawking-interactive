@@ -59,7 +59,6 @@ function cleanPatch(patch: UpdatePatch) {
     if (k in out && typeof out[k] === 'string' && (out[k] as string).trim() === '') out[k] = undefined;
   }
   if ('gameModes' in out && Array.isArray(out.gameModes) && out.gameModes.length === 0) out.gameModes = undefined;
-  if ('media' in out && out.media && typeof out.media === 'object' && !(out.media as { src?: string }).src) out.media = undefined;
   return out as Partial<Poi>;
 }
 
