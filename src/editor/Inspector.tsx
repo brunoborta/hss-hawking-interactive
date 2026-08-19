@@ -4,6 +4,7 @@ import type { Poi } from '../data/schema';
 import { ZONES } from '../data/zones';
 import { GAME_MODES, type GameModeId } from '../data/gameModes';
 import { kebab } from '../lib/kebab';
+import { PoiImage } from '../map/PoiImage';
 
 const GAME_MODE_ORDER = Object.fromEntries(GAME_MODES.map((m, i) => [m.id, i])) as Record<GameModeId, number>;
 
@@ -162,9 +163,18 @@ export function Inspector({ poi, onChange }: { poi: Poi; onChange: (patch: Patch
         })}
       </fieldset>
 
-      <Field label="Media src (media/<id>.<ext>)" htmlFor="insp-media">
-        <input id="insp-media" className={input} value={poi.media?.src ?? ''} onChange={(e) => onChange({ media: e.target.value ? { src: e.target.value, alt: poi.media?.alt } : undefined })} />
-      </Field>
+      <div className="flex flex-col gap-1 text-xs">
+        <span className="uppercase tracking-[0.15em] text-cyan-line/80">Image</span>
+        <PoiImage
+          poi={poi}
+          className="w-full rounded border border-cyan-line/30"
+          fallback={
+            <p className="rounded border border-dashed border-white/15 px-2 py-3 text-center text-white/40">
+              No image — drop <code>{poi.id}.png</code> in <code>public/media/pics/</code>
+            </p>
+          }
+        />
+      </div>
 
       <Field label="Notes (not shown)" htmlFor="insp-notes">
         <textarea id="insp-notes" rows={2} className={input} value={poi.notes ?? ''} onChange={(e) => onChange({ notes: e.target.value })} />

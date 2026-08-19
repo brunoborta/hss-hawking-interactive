@@ -27,7 +27,6 @@ describe('mapDataSchema', () => {
           description: 'Next to the airlock.',
           variant: 'medkit',
           gameModes: ['extract-the-data', 'kill-the-specimen'],
-          media: { src: 'media/healing-laboratory-01.webp', alt: 'Healing station' },
           notes: 'verified in v1.2',
         },
       ]),
@@ -60,13 +59,12 @@ describe('mapDataSchema', () => {
     expect(safeParseMapData(withPois([{ ...validPoi, y: 652 }])).ok).toBe(false);
   });
 
-  it('rejects long or html descriptions, bad variant/gameModes/media', () => {
+  it('rejects long or html descriptions, bad variant/gameModes', () => {
     expect(safeParseMapData(withPois([{ ...validPoi, description: 'x'.repeat(281) }])).ok).toBe(false);
     expect(safeParseMapData(withPois([{ ...validPoi, description: '<b>hi</b>' }])).ok).toBe(false);
     expect(safeParseMapData(withPois([{ ...validPoi, variant: 'Shot Gun' }])).ok).toBe(false);
     expect(safeParseMapData(withPois([{ ...validPoi, gameModes: ['Classic'] }])).ok).toBe(false);
     expect(safeParseMapData(withPois([{ ...validPoi, gameModes: ['sabotage'] }])).ok).toBe(false);
-    expect(safeParseMapData(withPois([{ ...validPoi, media: { src: 'foo.png' } }])).ok).toBe(false);
   });
 
   it('rejects more than one command-deck / shuttle', () => {

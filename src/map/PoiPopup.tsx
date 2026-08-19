@@ -4,8 +4,7 @@ import { ZONE_BY_ID } from '../data/zones';
 import { GAME_MODE_BY_ID } from '../data/gameModes';
 import { CategoryIcon } from '../icons/CategoryIcon';
 import { displayName } from '../lib/display';
-
-const BASE = import.meta.env.BASE_URL;
+import { PoiImage } from './PoiImage';
 
 export function PoiPopup({ poi }: { poi: Poi }) {
   const cat = CATEGORY_BY_ID[poi.category];
@@ -26,14 +25,7 @@ export function PoiPopup({ poi }: { poi: Poi }) {
           </>
         )}
       </div>
-      {poi.media && (
-        <img
-          src={`${BASE}${poi.media.src}`}
-          alt={poi.media.alt ?? displayName(poi)}
-          loading="lazy"
-          className="mb-2 w-full rounded border border-cyan-line/30"
-        />
-      )}
+      <PoiImage poi={poi} className="mb-2 w-full rounded border border-cyan-line/30" />
       {poi.description && <p className="leading-snug">{poi.description}</p>}
       {poi.gameModes && poi.gameModes.length > 0 && (
         <p className="mt-2 text-xs text-white/60">

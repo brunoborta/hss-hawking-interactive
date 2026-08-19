@@ -8,7 +8,6 @@ export const IMAGE_WIDTH = 1395;
 export const IMAGE_HEIGHT = 651;
 
 const KEBAB = /^[a-z0-9]+(-[a-z0-9]+)*$/;
-const MEDIA_SRC = /^media\/[a-z0-9-]+\.(webp|png|jpg|jpeg|gif|mp4)$/;
 
 export const poiSchema = z
   .object({
@@ -26,12 +25,6 @@ export const poiSchema = z
       .optional(),
     variant: z.string().regex(KEBAB, 'variant must be kebab-case').optional(),
     gameModes: z.array(z.enum(GAME_MODE_IDS)).optional(),
-    media: z
-      .object({
-        src: z.string().regex(MEDIA_SRC, 'media.src must look like media/<id>.<ext>'),
-        alt: z.string().trim().max(200).optional(),
-      })
-      .optional(),
     notes: z.string().max(2000).optional(),
   })
   .superRefine((poi, ctx) => {
