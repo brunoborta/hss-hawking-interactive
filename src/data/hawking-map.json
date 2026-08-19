@@ -6,12 +6,54 @@
   },
   "pois": [
     {
+      "id": "healing-crew-quarters-01",
+      "category": "healing",
+      "zone": "crew-quarters",
+      "x": 816,
+      "y": 64,
+      "name": "Healing Point - Officers Quarterse",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ]
+    },
+    {
       "id": "healing-hub-01",
       "category": "healing",
       "zone": "hub",
       "x": 613.1,
       "y": 322.9,
       "name": "Healing Point - Central Hub",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ]
+    },
+    {
+      "id": "healing-laboratory-01",
+      "category": "healing",
+      "zone": "laboratory",
+      "x": 872,
+      "y": 417,
+      "name": "Healing Point - Surgical Unit",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ]
+    },
+    {
+      "id": "healing-laboratory-02",
+      "category": "healing",
+      "zone": "laboratory",
+      "x": 932.6,
+      "y": 517.3,
+      "name": "Healing Point - Genetic Laboratory",
       "gameModes": [
         "extract-the-data",
         "kill-the-specimen",
@@ -40,6 +82,62 @@
       "x": 333,
       "y": 222,
       "name": "Healing Point - Shuttle Bay",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ]
+    },
+    {
+      "id": "ammo-crew-quarters-01",
+      "category": "ammo",
+      "zone": "crew-quarters",
+      "x": 763,
+      "y": 62,
+      "name": "Ammo Point - Officers Quarters",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ]
+    },
+    {
+      "id": "ammo-crew-quarters-02",
+      "category": "ammo",
+      "zone": "crew-quarters",
+      "x": 838,
+      "y": 111,
+      "name": "Ammo Point - Workers Dormitories",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ]
+    },
+    {
+      "id": "ammo-laboratory-01",
+      "category": "ammo",
+      "zone": "laboratory",
+      "x": 867.8,
+      "y": 440.5,
+      "name": "Ammo Point - Experimental Labs",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ]
+    },
+    {
+      "id": "ammo-laboratory-02",
+      "category": "ammo",
+      "zone": "laboratory",
+      "x": 680.3,
+      "y": 614.8,
+      "name": "Ammo Point - Farm Storage",
       "gameModes": [
         "extract-the-data",
         "kill-the-specimen",
@@ -104,6 +202,48 @@
       ]
     },
     {
+      "id": "capsule-shuttle-bay-02",
+      "category": "capsule",
+      "zone": "shuttle-bay",
+      "x": 489,
+      "y": 196,
+      "name": "Respawn Capsule 2 - Shuttle Bay",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ]
+    },
+    {
+      "id": "capsule-crew-quarters-03",
+      "category": "capsule",
+      "zone": "crew-quarters",
+      "x": 717,
+      "y": 95,
+      "name": "Respawn Capsule 1 - Officers Quarters",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ]
+    },
+    {
+      "id": "capsule-crew-quarters-04",
+      "category": "capsule",
+      "zone": "crew-quarters",
+      "x": 868,
+      "y": 84,
+      "name": "Respawn Capsule 2 - Officers Quarters",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ]
+    },
+    {
       "id": "capsule-hub-01",
       "category": "capsule",
       "zone": "hub",
@@ -160,6 +300,34 @@
       ]
     },
     {
+      "id": "capsule-laboratory-02",
+      "category": "capsule",
+      "zone": "laboratory",
+      "x": 764,
+      "y": 412,
+      "name": "Respawn Capsule - Hospital Bay",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ]
+    },
+    {
+      "id": "capsule-laboratory-03",
+      "category": "capsule",
+      "zone": "laboratory",
+      "x": 867.8,
+      "y": 540.8,
+      "name": "Respawn Capsule - Experimental Labs",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ]
+    },
+    {
       "id": "capsule-machinery-01",
       "category": "capsule",
       "zone": "machinery",
@@ -202,6 +370,20 @@
       ]
     },
     {
+      "id": "capsule-machinery-04",
+      "category": "capsule",
+      "zone": "machinery",
+      "x": 971.6,
+      "y": 247.2,
+      "name": "Respawn Capsule - Machinery",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ]
+    },
+    {
       "id": "capsule-shuttle-bay-01",
       "category": "capsule",
       "zone": "shuttle-bay",
@@ -216,12 +398,26 @@
       ]
     },
     {
-      "id": "capsule-shuttle-bay-02",
-      "category": "capsule",
-      "zone": "shuttle-bay",
-      "x": 489,
-      "y": 196,
-      "name": "Respawn Capsule 2 - Shuttle Bay",
+      "id": "info-hub-01",
+      "category": "info",
+      "zone": "hub",
+      "x": 653,
+      "y": 320,
+      "name": "Central Hub",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ]
+    },
+    {
+      "id": "info-machinery-01",
+      "category": "info",
+      "zone": "machinery",
+      "x": 980.5,
+      "y": 267.6,
+      "name": "Levers Computer",
       "gameModes": [
         "extract-the-data",
         "kill-the-specimen",
@@ -266,6 +462,41 @@
       ]
     },
     {
+      "id": "black-box-crew-quarters-01",
+      "category": "black-box",
+      "zone": "crew-quarters",
+      "x": 761,
+      "y": 122,
+      "name": "Black Box - Crew Quarters",
+      "gameModes": [
+        "extract-the-data"
+      ]
+    },
+    {
+      "id": "black-box-laboratory-01",
+      "category": "black-box",
+      "zone": "laboratory",
+      "x": 1077.6,
+      "y": 565.4,
+      "name": "Black Box - Laboratory",
+      "gameModes": [
+        "extract-the-data"
+      ],
+      "description": "You have access to this black box usually through vents on the Experimental Places"
+    },
+    {
+      "id": "black-box-machinery-01",
+      "category": "black-box",
+      "zone": "machinery",
+      "x": 1282,
+      "y": 320.1,
+      "name": "Black Box - Machinery",
+      "gameModes": [
+        "extract-the-data"
+      ],
+      "description": "Behind the Power Control computer used on Destroy the Area mode."
+    },
+    {
       "id": "pipe-lever-blue-machinery-01",
       "category": "pipe-lever-blue",
       "zone": "machinery",
@@ -294,6 +525,216 @@
         "destroy-the-area",
         "capture-the-specimen"
       ]
+    },
+    {
+      "id": "pipe-lever-blue-machinery-03",
+      "category": "pipe-lever-blue",
+      "zone": "machinery",
+      "x": 1012.4,
+      "y": 226.3,
+      "name": "Blue Pipe Lever",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ],
+      "description": "Lever number is randomized (1-8) each run"
+    },
+    {
+      "id": "pipe-lever-blue-machinery-04",
+      "category": "pipe-lever-blue",
+      "zone": "machinery",
+      "x": 1085.6,
+      "y": 270.1,
+      "name": "Blue Pipe Lever - Machinery",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ],
+      "description": "Lever number is randomized (1-8) each run"
+    },
+    {
+      "id": "pipe-lever-blue-machinery-05",
+      "category": "pipe-lever-blue",
+      "zone": "machinery",
+      "x": 1113.3,
+      "y": 259.1,
+      "name": "Blue Pipe Lever - Machinery",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ],
+      "description": "Lever number is randomized (1-8) each run"
+    },
+    {
+      "id": "pipe-lever-blue-machinery-06",
+      "category": "pipe-lever-blue",
+      "zone": "machinery",
+      "x": 1105.8,
+      "y": 200.3,
+      "name": "Blue Pipe Lever - Machinery",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ],
+      "description": "Lever number is randomized (1-8) each run"
+    },
+    {
+      "id": "pipe-lever-blue-machinery-07",
+      "category": "pipe-lever-blue",
+      "zone": "machinery",
+      "x": 1035.1,
+      "y": 107.8,
+      "name": "Blue Pipe Lever - Machinery",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ],
+      "description": "Lever number is randomized (1-8) each run"
+    },
+    {
+      "id": "pipe-lever-blue-machinery-08",
+      "category": "pipe-lever-blue",
+      "zone": "machinery",
+      "x": 1035,
+      "y": 136,
+      "name": "Blue Pipe Lever - Machinery",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ],
+      "description": "Lever number is randomized (1-8) each run"
+    },
+    {
+      "id": "pipe-lever-red-machinery-01",
+      "category": "pipe-lever-red",
+      "zone": "machinery",
+      "x": 856.2,
+      "y": 376.9,
+      "name": "Red Pipe Lever",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ],
+      "description": "Lever number is randomized (1-8) each run"
+    },
+    {
+      "id": "pipe-lever-red-machinery-02",
+      "category": "pipe-lever-red",
+      "zone": "machinery",
+      "x": 1010.3,
+      "y": 372.7,
+      "name": "Red Pipe Lever",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ],
+      "description": "Lever number is randomized (1-8) each run"
+    },
+    {
+      "id": "pipe-lever-red-machinery-03",
+      "category": "pipe-lever-red",
+      "zone": "machinery",
+      "x": 1109.6,
+      "y": 373.5,
+      "name": "Red Pipe Lever",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ],
+      "description": "Lever number is randomized (1-8) each run"
+    },
+    {
+      "id": "pipe-lever-red-machinery-04",
+      "category": "pipe-lever-red",
+      "zone": "machinery",
+      "x": 1096.5,
+      "y": 439.1,
+      "name": "Red Pipe Lever",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ],
+      "description": "Lever number is randomized (1-8) each run"
+    },
+    {
+      "id": "pipe-lever-red-machinery-05",
+      "category": "pipe-lever-red",
+      "zone": "machinery",
+      "x": 1056.6,
+      "y": 417.2,
+      "name": "Red Pipe Lever",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ],
+      "description": "Lever number is randomized (1-8) each run"
+    },
+    {
+      "id": "pipe-lever-red-machinery-06",
+      "category": "pipe-lever-red",
+      "zone": "machinery",
+      "x": 1035.2,
+      "y": 465.7,
+      "name": "Red Pipe Lever",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ],
+      "description": "Lever number is randomized (1-8) each run"
+    },
+    {
+      "id": "pipe-lever-red-machinery-07",
+      "category": "pipe-lever-red",
+      "zone": "machinery",
+      "x": 1061.4,
+      "y": 482.7,
+      "name": "Red Pipe Lever - Machinery",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ],
+      "description": "Lever number is randomized (1-8) each run"
+    },
+    {
+      "id": "pipe-lever-red-machinery-08",
+      "category": "pipe-lever-red",
+      "zone": "machinery",
+      "x": 1033.8,
+      "y": 494,
+      "name": "Red Pipe Lever - Machinery",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ],
+      "description": "Lever number is randomized (1-8) each run"
     },
     {
       "id": "command-deck-hub-01",
