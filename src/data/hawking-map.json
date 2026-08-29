@@ -423,7 +423,8 @@
         "kill-the-specimen",
         "destroy-the-area",
         "capture-the-specimen"
-      ]
+      ],
+      "notes": "To unlock the Code Engine door, you have to be sure all the levers (blue and red) are green in this computer. If any is red, you have to find that lever and pull it. When everything is green, open the door here."
     },
     {
       "id": "self-destruct-machinery-01",
@@ -480,7 +481,7 @@
       "x": 1077.6,
       "y": 565.4,
       "name": "Black Box - Laboratory",
-      "description": "You have access to this black box usually through vents on the Experimental Places",
+      "description": "You have access to this black box usually through vents on the Experimental Labs",
       "gameModes": [
         "extract-the-data"
       ]
@@ -749,28 +750,6 @@
       ]
     },
     {
-      "id": "weapon-crew-quarters-02",
-      "category": "weapon",
-      "zone": "crew-quarters",
-      "x": 963,
-      "y": 424,
-      "name": "Weapon - Crew Quarters",
-      "gameModes": [
-        "kill-the-specimen"
-      ]
-    },
-    {
-      "id": "weapon-crew-quarters-03",
-      "category": "weapon",
-      "zone": "crew-quarters",
-      "x": 1219,
-      "y": 424,
-      "name": "Weapon - Crew Quarters",
-      "gameModes": [
-        "kill-the-specimen"
-      ]
-    },
-    {
       "id": "weapon-crew-quarters-04",
       "category": "weapon",
       "zone": "crew-quarters",
@@ -795,23 +774,45 @@
       ]
     },
     {
-      "id": "weapon-crew-quarters-06",
+      "id": "weapon-laboratory-01",
       "category": "weapon",
-      "zone": "crew-quarters",
-      "x": 1285.5,
-      "y": 444.5,
-      "name": "Weapon - Crew Quarters",
+      "zone": "laboratory",
+      "x": 987.1,
+      "y": 570.4,
+      "name": "Weapon - Laboratory",
       "gameModes": [
         "kill-the-specimen"
       ]
     },
     {
-      "id": "weapon-crew-quarters-07",
+      "id": "weapon-laboratory-02",
       "category": "weapon",
-      "zone": "crew-quarters",
-      "x": 987.1,
-      "y": 570.4,
-      "name": "Weapon - Crew Quarters",
+      "zone": "laboratory",
+      "x": 963,
+      "y": 424,
+      "name": "Weapon - Laboratory",
+      "gameModes": [
+        "kill-the-specimen"
+      ]
+    },
+    {
+      "id": "weapon-machinery-01",
+      "category": "weapon",
+      "zone": "machinery",
+      "x": 1219,
+      "y": 424,
+      "name": "Weapon - Engine B",
+      "gameModes": [
+        "kill-the-specimen"
+      ]
+    },
+    {
+      "id": "weapon-machinery-02",
+      "category": "weapon",
+      "zone": "machinery",
+      "x": 1285.5,
+      "y": 444.5,
+      "name": "Weapon - Engine B",
       "gameModes": [
         "kill-the-specimen"
       ]
