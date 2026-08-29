@@ -202,20 +202,6 @@
       ]
     },
     {
-      "id": "capsule-shuttle-bay-02",
-      "category": "capsule",
-      "zone": "shuttle-bay",
-      "x": 489,
-      "y": 196,
-      "name": "Respawn Capsule 2 - Shuttle Bay",
-      "gameModes": [
-        "extract-the-data",
-        "kill-the-specimen",
-        "destroy-the-area",
-        "capture-the-specimen"
-      ]
-    },
-    {
       "id": "capsule-crew-quarters-03",
       "category": "capsule",
       "zone": "crew-quarters",
@@ -398,6 +384,20 @@
       ]
     },
     {
+      "id": "capsule-shuttle-bay-02",
+      "category": "capsule",
+      "zone": "shuttle-bay",
+      "x": 489,
+      "y": 196,
+      "name": "Respawn Capsule 2 - Shuttle Bay",
+      "gameModes": [
+        "extract-the-data",
+        "kill-the-specimen",
+        "destroy-the-area",
+        "capture-the-specimen"
+      ]
+    },
+    {
       "id": "info-hub-01",
       "category": "info",
       "zone": "hub",
@@ -423,7 +423,8 @@
         "kill-the-specimen",
         "destroy-the-area",
         "capture-the-specimen"
-      ]
+      ],
+      "notes": "To unlock the Code Engine door, you have to be sure all the levers (blue and red) are green in this computer. If any is red, you have to find that lever and pull it. When everything is green, open the door here."
     },
     {
       "id": "self-destruct-machinery-01",
@@ -470,7 +471,8 @@
       "name": "Black Box - Crew Quarters",
       "gameModes": [
         "extract-the-data"
-      ]
+      ],
+      "description": "The black box is inside the Server Room, which is always locked. To get in, you have to enter in the Ammo Point of this area and go through the vent. Inside the vent, turn right and go straight all the way. Drop in the last hole. You will be inside the Server Room. Use the PC."
     },
     {
       "id": "black-box-laboratory-01",
@@ -479,10 +481,10 @@
       "x": 1077.6,
       "y": 565.4,
       "name": "Black Box - Laboratory",
+      "description": "You have access to this black box usually through vents on the Experimental Labs",
       "gameModes": [
         "extract-the-data"
-      ],
-      "description": "You have access to this black box usually through vents on the Experimental Places"
+      ]
     },
     {
       "id": "black-box-machinery-01",
@@ -491,10 +493,10 @@
       "x": 1282,
       "y": 320.1,
       "name": "Black Box - Machinery",
+      "description": "Behind the Power Control computer used on Destroy the Area mode.",
       "gameModes": [
         "extract-the-data"
-      ],
-      "description": "Behind the Power Control computer used on Destroy the Area mode."
+      ]
     },
     {
       "id": "pipe-lever-blue-machinery-01",
@@ -533,13 +535,13 @@
       "x": 1012.4,
       "y": 226.3,
       "name": "Blue Pipe Lever",
+      "description": "Lever number is randomized (1-8) each run",
       "gameModes": [
         "extract-the-data",
         "kill-the-specimen",
         "destroy-the-area",
         "capture-the-specimen"
-      ],
-      "description": "Lever number is randomized (1-8) each run"
+      ]
     },
     {
       "id": "pipe-lever-blue-machinery-04",
@@ -548,13 +550,13 @@
       "x": 1085.6,
       "y": 270.1,
       "name": "Blue Pipe Lever - Machinery",
+      "description": "Lever number is randomized (1-8) each run",
       "gameModes": [
         "extract-the-data",
         "kill-the-specimen",
         "destroy-the-area",
         "capture-the-specimen"
-      ],
-      "description": "Lever number is randomized (1-8) each run"
+      ]
     },
     {
       "id": "pipe-lever-blue-machinery-05",
@@ -563,13 +565,13 @@
       "x": 1113.3,
       "y": 259.1,
       "name": "Blue Pipe Lever - Machinery",
+      "description": "Lever number is randomized (1-8) each run",
       "gameModes": [
         "extract-the-data",
         "kill-the-specimen",
         "destroy-the-area",
         "capture-the-specimen"
-      ],
-      "description": "Lever number is randomized (1-8) each run"
+      ]
     },
     {
       "id": "pipe-lever-blue-machinery-06",
@@ -578,13 +580,13 @@
       "x": 1105.8,
       "y": 200.3,
       "name": "Blue Pipe Lever - Machinery",
+      "description": "Lever number is randomized (1-8) each run",
       "gameModes": [
         "extract-the-data",
         "kill-the-specimen",
         "destroy-the-area",
         "capture-the-specimen"
-      ],
-      "description": "Lever number is randomized (1-8) each run"
+      ]
     },
     {
       "id": "pipe-lever-blue-machinery-07",
@@ -593,13 +595,13 @@
       "x": 1035.1,
       "y": 107.8,
       "name": "Blue Pipe Lever - Machinery",
+      "description": "Lever number is randomized (1-8) each run",
       "gameModes": [
         "extract-the-data",
         "kill-the-specimen",
         "destroy-the-area",
         "capture-the-specimen"
-      ],
-      "description": "Lever number is randomized (1-8) each run"
+      ]
     },
     {
       "id": "pipe-lever-blue-machinery-08",
@@ -608,13 +610,13 @@
       "x": 1035,
       "y": 136,
       "name": "Blue Pipe Lever - Machinery",
+      "description": "Lever number is randomized (1-8) each run",
       "gameModes": [
         "extract-the-data",
         "kill-the-specimen",
         "destroy-the-area",
         "capture-the-specimen"
-      ],
-      "description": "Lever number is randomized (1-8) each run"
+      ]
     },
     {
       "id": "pipe-lever-red-machinery-01",
@@ -623,13 +625,13 @@
       "x": 856.2,
       "y": 376.9,
       "name": "Red Pipe Lever",
+      "description": "Lever number is randomized (1-8) each run",
       "gameModes": [
         "extract-the-data",
         "kill-the-specimen",
         "destroy-the-area",
         "capture-the-specimen"
-      ],
-      "description": "Lever number is randomized (1-8) each run"
+      ]
     },
     {
       "id": "pipe-lever-red-machinery-02",
@@ -638,13 +640,13 @@
       "x": 1010.3,
       "y": 372.7,
       "name": "Red Pipe Lever",
+      "description": "Lever number is randomized (1-8) each run",
       "gameModes": [
         "extract-the-data",
         "kill-the-specimen",
         "destroy-the-area",
         "capture-the-specimen"
-      ],
-      "description": "Lever number is randomized (1-8) each run"
+      ]
     },
     {
       "id": "pipe-lever-red-machinery-03",
@@ -653,13 +655,13 @@
       "x": 1109.6,
       "y": 373.5,
       "name": "Red Pipe Lever",
+      "description": "Lever number is randomized (1-8) each run",
       "gameModes": [
         "extract-the-data",
         "kill-the-specimen",
         "destroy-the-area",
         "capture-the-specimen"
-      ],
-      "description": "Lever number is randomized (1-8) each run"
+      ]
     },
     {
       "id": "pipe-lever-red-machinery-04",
@@ -668,13 +670,13 @@
       "x": 1096.5,
       "y": 439.1,
       "name": "Red Pipe Lever",
+      "description": "Lever number is randomized (1-8) each run",
       "gameModes": [
         "extract-the-data",
         "kill-the-specimen",
         "destroy-the-area",
         "capture-the-specimen"
-      ],
-      "description": "Lever number is randomized (1-8) each run"
+      ]
     },
     {
       "id": "pipe-lever-red-machinery-05",
@@ -683,13 +685,13 @@
       "x": 1056.6,
       "y": 417.2,
       "name": "Red Pipe Lever",
+      "description": "Lever number is randomized (1-8) each run",
       "gameModes": [
         "extract-the-data",
         "kill-the-specimen",
         "destroy-the-area",
         "capture-the-specimen"
-      ],
-      "description": "Lever number is randomized (1-8) each run"
+      ]
     },
     {
       "id": "pipe-lever-red-machinery-06",
@@ -698,13 +700,13 @@
       "x": 1035.2,
       "y": 465.7,
       "name": "Red Pipe Lever",
+      "description": "Lever number is randomized (1-8) each run",
       "gameModes": [
         "extract-the-data",
         "kill-the-specimen",
         "destroy-the-area",
         "capture-the-specimen"
-      ],
-      "description": "Lever number is randomized (1-8) each run"
+      ]
     },
     {
       "id": "pipe-lever-red-machinery-07",
@@ -713,13 +715,13 @@
       "x": 1061.4,
       "y": 482.7,
       "name": "Red Pipe Lever - Machinery",
+      "description": "Lever number is randomized (1-8) each run",
       "gameModes": [
         "extract-the-data",
         "kill-the-specimen",
         "destroy-the-area",
         "capture-the-specimen"
-      ],
-      "description": "Lever number is randomized (1-8) each run"
+      ]
     },
     {
       "id": "pipe-lever-red-machinery-08",
@@ -728,13 +730,92 @@
       "x": 1033.8,
       "y": 494,
       "name": "Red Pipe Lever - Machinery",
+      "description": "Lever number is randomized (1-8) each run",
       "gameModes": [
         "extract-the-data",
         "kill-the-specimen",
         "destroy-the-area",
         "capture-the-specimen"
+      ]
+    },
+    {
+      "id": "weapon-crew-quarters-01",
+      "category": "weapon",
+      "zone": "crew-quarters",
+      "x": 893.1,
+      "y": 23.1,
+      "name": "Weapon - Crew Quarters",
+      "gameModes": [
+        "kill-the-specimen"
+      ]
+    },
+    {
+      "id": "weapon-crew-quarters-04",
+      "category": "weapon",
+      "zone": "crew-quarters",
+      "x": 687,
+      "y": 36.7,
+      "name": "Weapon - Crew Quarters",
+      "gameModes": [
+        "kill-the-specimen",
+        "capture-the-specimen"
       ],
-      "description": "Lever number is randomized (1-8) each run"
+      "description": "The weapon is inside the Captain's Room, which is always locked. To get in, you have to enter in the Ammo Point of this area and go through the vent. Go straight all the way and drop on the last hole. You will be inside the Captain's Room."
+    },
+    {
+      "id": "weapon-crew-quarters-05",
+      "category": "weapon",
+      "zone": "crew-quarters",
+      "x": 991.8,
+      "y": 25.8,
+      "name": "Weapon - Crew Quarters",
+      "gameModes": [
+        "kill-the-specimen"
+      ]
+    },
+    {
+      "id": "weapon-laboratory-01",
+      "category": "weapon",
+      "zone": "laboratory",
+      "x": 987.1,
+      "y": 570.4,
+      "name": "Weapon - Laboratory",
+      "gameModes": [
+        "kill-the-specimen"
+      ]
+    },
+    {
+      "id": "weapon-laboratory-02",
+      "category": "weapon",
+      "zone": "laboratory",
+      "x": 963,
+      "y": 424,
+      "name": "Weapon - Laboratory",
+      "gameModes": [
+        "kill-the-specimen"
+      ]
+    },
+    {
+      "id": "weapon-machinery-01",
+      "category": "weapon",
+      "zone": "machinery",
+      "x": 1219,
+      "y": 424,
+      "name": "Weapon - Engine B",
+      "gameModes": [
+        "kill-the-specimen"
+      ]
+    },
+    {
+      "id": "weapon-machinery-02",
+      "category": "weapon",
+      "zone": "machinery",
+      "x": 1285.5,
+      "y": 444.5,
+      "name": "Weapon - Engine B",
+      "gameModes": [
+        "kill-the-specimen"
+      ]
     },
     {
       "id": "command-deck-hub-01",
