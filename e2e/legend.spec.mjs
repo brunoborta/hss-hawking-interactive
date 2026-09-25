@@ -30,9 +30,6 @@ const VIEWPORTS = [
   [1440, 900],
 ];
 
-// Bundled Chromium by default, because that is what CI has. Point at the
-// installed browser locally with E2E_CHROME_CHANNEL=chrome.
-const channel = process.env.E2E_CHROME_CHANNEL;
 /**
  * True when the element takes up no room on screen, however it is hidden.
  *
@@ -46,7 +43,29 @@ function offViewport(box, viewportHeight) {
   return box.y >= viewportHeight - EDGE_TOLERANCE || box.y + box.height <= EDGE_TOLERANCE;
 }
 
-const browser = await chromium.launch({ headless: true, ...(channel ? { channel } : {}) });
+/**
+ * Prefers the bundled Chromium, which is what CI installs, and falls back to a
+ * locally installed Chrome.
+ *
+ * The bundled browser lives in a cache shared by every project on the machine
+ * (~/Library/Caches/ms-playwright), so it can be missing or unwritable for
+ * reasons that have nothing to do with this repo. Falling back lets a developer
+ * with Chrome installed run these tests without fixing that first.
+ * E2E_CHROME_CHANNEL forces a channel and skips the fallback.
+ */
+async function launchBrowser() {
+  const forced = process.env.E2E_CHROME_CHANNEL;
+  if (forced) return chromium.launch({ headless: true, channel: forced });
+  try {
+    return await chromium.launch({ headless: true });
+  } catch (error) {
+    console.warn(`  bundled Chromium unavailable (${error.message.split('\n')[0]})`);
+    console.warn('  falling back to the installed Chrome');
+    return chromium.launch({ headless: true, channel: 'chrome' });
+  }
+}
+
+const browser = await launchBrowser();
 const page = await browser.newPage();
 let failures = 0;
 
