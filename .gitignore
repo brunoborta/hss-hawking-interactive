@@ -155,3 +155,6 @@ dist
 tools/rectify-preview.png
 tools/pics-grid.jpg
 tools/__pycache__/
+
+# e2e artefacts
+e2e/screenshots/
