@@ -14,7 +14,8 @@
     "typecheck": "tsc --noEmit",
     "validate:data": "vitest run src/data/publishedData.test.ts",
     "media:report": "node scripts/media-report.mjs",
-    "pics:process": "python tools/process_pics.py"
+    "pics:process": "python tools/process_pics.py",
+    "test:e2e": "npm run build && node e2e/run.mjs"
   },
   "dependencies": {
     "leaflet": "^1.9.4",
@@ -41,6 +42,7 @@
     "eslint-plugin-react-refresh": "^0.5.0",
     "globals": "^17.0.0",
     "jsdom": "^30.0.0",
+    "playwright": "^1.63.0",
     "prettier": "^3.6.0",
     "tailwindcss": "^4.1.0",
     "typescript": "~5.9.3",
